@@ -1,0 +1,18 @@
+network:
+  name: test
+  version: 0.1
+  hosts:
+    - M
+      mode : netns
+      init : ./scripts/M
+ 
+    - N
+      mode : netns
+      init : ./scripts/N
+ 
+  links :
+    - M:eth0!N:eth0
+ 
+ 
+  consoles :
+    - all

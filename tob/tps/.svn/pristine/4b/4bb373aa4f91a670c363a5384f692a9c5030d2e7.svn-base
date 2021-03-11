@@ -1,0 +1,4 @@
+Début de la vérification...
+[ERROR] JeuReel.java:18:19: La variable 'nombreAllumettes' devrait être privée et avoir des accesseurs. [VisibilityModifier]
+[ERROR] Jouer.java:19:30: Les crochets du tableau ne sont pas placés au bon endroit. [ArrayTypeStyle]
+Vérification terminée.

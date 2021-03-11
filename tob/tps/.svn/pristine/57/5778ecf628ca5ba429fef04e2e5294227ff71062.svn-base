@@ -1,0 +1,11 @@
+allumettes/Jouer.java:42: error: cannot find symbol
+						case Expert.NOM_STRATEGIE: strategie = new Expert();
+						     ^
+  symbol:   variable Expert
+  location: class Jouer
+allumettes/Jouer.java:42: error: cannot find symbol
+						case Expert.NOM_STRATEGIE: strategie = new Expert();
+						                                           ^
+  symbol:   class Expert
+  location: class Jouer
+2 errors

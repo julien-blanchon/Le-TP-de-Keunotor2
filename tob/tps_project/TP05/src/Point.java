@@ -1,0 +1,1 @@
+../../../tps/TP05/Point.java

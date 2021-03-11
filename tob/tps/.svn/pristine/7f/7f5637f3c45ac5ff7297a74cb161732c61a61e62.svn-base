@@ -1,0 +1,267 @@
+File allumettes/ConfigurationException.java: 21 tokens, 16 lines
+File allumettes/Jeu.java: 23 tokens, 21 lines
+File allumettes/Naif.java: 82 tokens, 33 lines
+File allumettes/Arbitre.java: 509 tokens, 119 lines
+File allumettes/Strategie.java: 22 tokens, 23 lines
+File allumettes/JeuReel.java: 218 tokens, 110 lines
+File allumettes/OperationInterditeException.java: 34 tokens, 19 lines
+File allumettes/Tricheur.java: 107 tokens, 41 lines
+File allumettes/Expert.java: 93 tokens, 39 lines
+File allumettes/Lente.java: 43 tokens, 29 lines
+File allumettes/JeuProcuration.java: 104 tokens, 59 lines
+File allumettes/CoupInvalideException.java: 51 tokens, 29 lines
+File allumettes/Humain.java: 276 tokens, 104 lines
+File allumettes/Joueur.java: 108 tokens, 62 lines
+File allumettes/Rapide.java: 69 tokens, 37 lines
+File allumettes/Jouer.java: 459 tokens, 104 lines
+File allumettes/AbandonException.java: 31 tokens, 23 lines
+Total input: 17 files (17 new, 0 old), 2250 tokens
+
+allumettes/Naif.java: line 1-29 [46]
+allumettes/Expert.java: line 1-28
+< package allumettes;
+< 
+< /** Défini les propriétés de base de la stratégie "naif"
+<  * d'un joueur du jeu des allumettes.
+<  * @author  Julien Blanchon
+<  * @version 1.0
+<  */
+< public class Naif implements Strategie {
+< 
+<     /**Nom de la stratégie.*/
+<     public static final String NOM_STRATEGIE = "naif";
+< 
+<     /** Obtenir le nom de la stratégie : naif.
+<      * @return nom de la stratégie
+<      */
+<     @Override
+<     public String getNom() {
+<         return NOM_STRATEGIE;
+<     }
+< 
+<     /** Obtenir le choix de la stratégie naif: Nombre aléatoire entre 1 et jeu.PRISE_MAX.
+<      * @see Jeu#PRISE_MAX
+<      * @see java.util.Random
+<      * @return nombre d'allumettes à prendre.
+<      * @Range(from = 1, to = bound)
+<      */
+<     @Override
+<     public int getPrise(Jeu jeu, String prenom) {
+<         int bound = Math.min(jeu.PRISE_MAX, jeu.getNombreAllumettes());
+---
+> package allumettes;
+> /** Défini les propriétés de base de la stratégie "Expert"
+>  * d'un joueur du jeu des allumettes.
+>  * @author  Julien Blanchon
+>  * @version 1.0
+>  */
+> public class Expert implements Strategie {
+> 
+>     /**Nom de la stratégie.*/
+>     public static final String NOM_STRATEGIE = "expert";
+> 
+>     /** Obtenir le nom de la stratégie : expert.
+>      * @return nom de la stratégie
+>      */
+>     @Override
+>     public String getNom() {
+>         return NOM_STRATEGIE;
+>     }
+> 
+>     /** Obtenir le choix de la stratégie expert.
+>      * Toujours faire en sorte de laisser NombreAllumettes = 1[PRISE_MAX+1].
+>      * Soit NombreAllumettes=k*(PRISE_MAX+1)+1
+>      * @see Jeu#PRISE_MAX
+>      * @return nombre d'allumettes à prendre.
+>      */
+>     @Override
+>     public int getPrise(Jeu jeu, String prenom) {
+>         int nombreAllumettes = jeu.getNombreAllumettes();
+
+allumettes/Lente.java: line 1-25 [39]
+allumettes/Rapide.java: line 1-28
+< package allumettes;
+< /** Défini les propriétés de base de la stratégie "Lente"
+<  * d'un joueur du jeu des allumettes.
+<  * @author  Julien Blanchon
+<  * @version 1.0
+<  */
+< public class Lente implements Strategie {
+< 
+<     /**Nom de la stratégie.*/
+<     public static final String NOM_STRATEGIE = "lente";
+< 
+<     /** Obtenir le nom de la stratégie : lente.
+<      * @return nom de la stratégie
+<      */
+<     @Override
+<     public String getNom() {
+<         return NOM_STRATEGIE;
+<     }
+< 
+<     /** Obtenir le choix de la stratégie lente.
+<      * Toujours prendre 1 allumette.
+<      * @return nombre d'allumettes à prendre.
+<      */
+<     @Override
+<     public int getPrise(Jeu jeu, String prenom) {
+---
+> package allumettes;
+> 
+> /** Défini les propriétés de base de la stratégie "rapide"
+>  * d'un joueur du jeu des allumettes.
+>  * @author  Julien Blanchon
+>  * @version 1.0
+>  */
+> public class Rapide implements Strategie {
+> 
+>     /**Nom de la stratégie.*/
+>     public static final String NOM_STRATEGIE = "rapide";
+> 
+>     /** Obtenir le nom de la stratégie : rapide.
+>      * @return nom de la stratégie
+>      */
+>     @Override
+>     public String getNom() {
+>         return NOM_STRATEGIE;
+>     }
+> 
+>     /** Obtenir le choix de la stratégie rapide: le plus grand nombre possible.
+>      * @see Jeu#getNombreAllumettes()
+>      * @see Jeu#PRISE_MAX
+>      * @return nombre d'allumettes à prendre.
+>      * @Range(from = 1, to = bound)
+>      */
+>     @Override
+>     public int getPrise(Jeu jeu, String prenom) {
+
+allumettes/Expert.java: line 1-27 [39]
+allumettes/Lente.java: line 1-25
+< package allumettes;
+< /** Défini les propriétés de base de la stratégie "Expert"
+<  * d'un joueur du jeu des allumettes.
+<  * @author  Julien Blanchon
+<  * @version 1.0
+<  */
+< public class Expert implements Strategie {
+< 
+<     /**Nom de la stratégie.*/
+<     public static final String NOM_STRATEGIE = "expert";
+< 
+<     /** Obtenir le nom de la stratégie : expert.
+<      * @return nom de la stratégie
+<      */
+<     @Override
+<     public String getNom() {
+<         return NOM_STRATEGIE;
+<     }
+< 
+<     /** Obtenir le choix de la stratégie expert.
+<      * Toujours faire en sorte de laisser NombreAllumettes = 1[PRISE_MAX+1].
+<      * Soit NombreAllumettes=k*(PRISE_MAX+1)+1
+<      * @see Jeu#PRISE_MAX
+<      * @return nombre d'allumettes à prendre.
+<      */
+<     @Override
+<     public int getPrise(Jeu jeu, String prenom) {
+---
+> package allumettes;
+> /** Défini les propriétés de base de la stratégie "Lente"
+>  * d'un joueur du jeu des allumettes.
+>  * @author  Julien Blanchon
+>  * @version 1.0
+>  */
+> public class Lente implements Strategie {
+> 
+>     /**Nom de la stratégie.*/
+>     public static final String NOM_STRATEGIE = "lente";
+> 
+>     /** Obtenir le nom de la stratégie : lente.
+>      * @return nom de la stratégie
+>      */
+>     @Override
+>     public String getNom() {
+>         return NOM_STRATEGIE;
+>     }
+> 
+>     /** Obtenir le choix de la stratégie lente.
+>      * Toujours prendre 1 allumette.
+>      * @return nombre d'allumettes à prendre.
+>      */
+>     @Override
+>     public int getPrise(Jeu jeu, String prenom) {
+
+allumettes/Tricheur.java: line 1-29 [38]
+allumettes/Expert.java: line 1-27
+< package allumettes;
+< 
+< import static allumettes.Jeu.PRISE_MAX;
+< 
+< /** Défini les propriétés de base de la stratégie "tricheur".
+<  * d'un joueur du jeu des allumettes
+<  * @author  Julien Blanchon
+<  * @version 1.0
+<  */
+< public class Tricheur implements Strategie {
+< 
+<     /**Nom de la stratégie.*/
+<     public static final String NOM_STRATEGIE = "tricheur";
+< 
+<     /** Obtenir le nom de la stratégie : tricheur.
+<      * @return nom de la stratégie
+<      */
+<     @Override
+<     public String getNom() {
+<         return NOM_STRATEGIE;
+<     }
+< 
+<     /** Obtenir le choix de la stratégie tricheur: triche puis prend
+<      * l'avant dernière allumettes.
+<      * @return nombre d'allumettes à prendre.
+<      * @throws CoupInvalideException si le coup est interdit.
+<      */
+<     @Override
+<     public int getPrise(Jeu jeu, String prenom) throws CoupInvalideException {
+---
+> package allumettes;
+> /** Défini les propriétés de base de la stratégie "Expert"
+>  * d'un joueur du jeu des allumettes.
+>  * @author  Julien Blanchon
+>  * @version 1.0
+>  */
+> public class Expert implements Strategie {
+> 
+>     /**Nom de la stratégie.*/
+>     public static final String NOM_STRATEGIE = "expert";
+> 
+>     /** Obtenir le nom de la stratégie : expert.
+>      * @return nom de la stratégie
+>      */
+>     @Override
+>     public String getNom() {
+>         return NOM_STRATEGIE;
+>     }
+> 
+>     /** Obtenir le choix de la stratégie expert.
+>      * Toujours faire en sorte de laisser NombreAllumettes = 1[PRISE_MAX+1].
+>      * Soit NombreAllumettes=k*(PRISE_MAX+1)+1
+>      * @see Jeu#PRISE_MAX
+>      * @return nombre d'allumettes à prendre.
+>      */
+>     @Override
+>     public int getPrise(Jeu jeu, String prenom) {
+
+allumettes/Jouer.java: line 35-39 [24]
+allumettes/Jouer.java: line 39-43
+< 						case Humain.NOM_STRATEGIE : strategie = new Humain();
+< 							break;
+< 						case Naif.NOM_STRATEGIE: strategie = new Naif();
+< 							break;
+< 						case Rapide.NOM_STRATEGIE: strategie = new Rapide();
+---
+> 						case Rapide.NOM_STRATEGIE: strategie = new Rapide();
+> 							break;
+> 						case Tricheur.NOM_STRATEGIE: strategie = new Tricheur();
+> 							break;
+> 						case Expert.NOM_STRATEGIE: strategie = new Expert();
+

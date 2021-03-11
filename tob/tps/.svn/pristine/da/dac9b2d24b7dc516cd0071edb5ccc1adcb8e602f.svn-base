@@ -1,0 +1,8 @@
+2,5c2,3
+< Exception in thread "main" java.lang.NullPointerException
+< 	at allumettes.Arbitre.faireJouer(Arbitre.java:65)
+< 	at allumettes.Arbitre.arbitrer(Arbitre.java:38)
+< 	at allumettes.Jouer.main(Jouer.java:50)
+---
+> [Je triche...]
+> Abandon de la partie car J1 triche !

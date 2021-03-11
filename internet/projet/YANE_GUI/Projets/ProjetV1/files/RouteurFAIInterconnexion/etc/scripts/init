@@ -1,0 +1,14 @@
+#!/bin/bash
+echo "Configuration R_FAI_Inter ..."
+
+#interface R_FAI
+ip addr add 123.51.251.130/28 dev eth0
+ip link set dev eth0 up
+
+#interface R_FAI_Service
+ip addr add 123.51.251.145/28 dev eth1
+ip link set dev eth1 up
+
+#interface ?
+#ip addr add 123.51.251.???????/29 dev eth2
+#ip link set dev eth2 up

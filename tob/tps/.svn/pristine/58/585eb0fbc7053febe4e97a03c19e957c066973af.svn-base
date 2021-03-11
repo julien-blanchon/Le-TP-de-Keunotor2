@@ -1,0 +1,148 @@
+File allumettes/ConfigurationException.java: 21 tokens, 16 lines
+File allumettes/Jeu.java: 23 tokens, 21 lines
+File allumettes/Naif.java: 82 tokens, 32 lines
+File allumettes/Arbitre.java: 504 tokens, 105 lines
+File allumettes/Strategie.java: 22 tokens, 23 lines (not NL-terminated)
+File allumettes/JeuReel.java: 193 tokens, 95 lines
+File allumettes/OperationInterditeException.java: 34 tokens, 19 lines
+File allumettes/Tricheur.java: 107 tokens, 40 lines
+File allumettes/JeuProcuration.java: 96 tokens, 59 lines
+File allumettes/CoupInvalideException.java: 51 tokens, 29 lines
+File allumettes/Humain.java: 276 tokens, 101 lines
+File allumettes/Joueur.java: 108 tokens, 62 lines
+File allumettes/Rapide.java: 69 tokens, 36 lines
+File allumettes/Jouer.java: 406 tokens, 87 lines
+File allumettes/AbandonException.java: 31 tokens, 23 lines
+Total input: 15 files (15 new, 0 old), 2023 tokens
+
+allumettes/Naif.java: line 1-27 [39]
+allumettes/Rapide.java: line 1-27
+< package allumettes;
+< 
+< /** Défini les propriétés de base de la stratégie "naif"
+<  * d'un joueur du jeu des allumettes.
+<  * @author  Julien Blanchon
+<  * @version 1.0
+<  */
+< public class Naif implements Strategie {
+< 
+<     public static final String nom = "naif";
+< 
+<     /** Obtenir le nom de la stratégie : naif.
+<      * @return nom de la stratégie
+<      */
+<     @Override
+<     public String getNom() {
+<         return nom;
+<     }
+< 
+<     /** Obtenir le choix de la stratégie naif: Nombre aléatoire entre 1 et jeu.PRISE_MAX.
+<      * @see Jeu#PRISE_MAX
+<      * @see java.util.Random
+<      * @return nombre d'allumettes à prendre.
+<      * @Range(from = 1, to = bound)
+<      */
+<     @Override
+<     public int getPrise(Jeu jeu, String nom) {
+---
+> package allumettes;
+> 
+> /** Défini les propriétés de base de la stratégie "rapide"
+>  * d'un joueur du jeu des allumettes.
+>  * @author  Julien Blanchon
+>  * @version 1.0
+>  */
+> public class Rapide implements Strategie {
+> 
+>     public static final String nom = "rapide";
+> 
+>     /** Obtenir le nom de la stratégie : rapide.
+>      * @return nom de la stratégie
+>      */
+>     @Override
+>     public String getNom() {
+>         return nom;
+>     }
+> 
+>     /** Obtenir le choix de la stratégie rapide: le plus grand nombre possible.
+>      * @see Jeu#getNombreAllumettes()
+>      * @see Jeu#PRISE_MAX
+>      * @return nombre d'allumettes à prendre.
+>      * @Range(from = 1, to = bound)
+>      */
+>     @Override
+>     public int getPrise(Jeu jeu, String nom) {
+
+allumettes/Tricheur.java: line 1-28 [38]
+allumettes/Rapide.java: line 1-27
+< package allumettes;
+< 
+< import static allumettes.Jeu.PRISE_MAX;
+< 
+< /** Défini les propriétés de base de la stratégie "tricheur".
+<  * d'un joueur du jeu des allumettes
+<  * @author  Julien Blanchon
+<  * @version 1.0
+<  */
+< public class Tricheur implements Strategie {
+< 
+<     public static final String nom = "tricheur";
+< 
+<     /** Obtenir le nom de la stratégie : tricheur.
+<      * @return nom de la stratégie
+<      */
+<     @Override
+<     public String getNom() {
+<         return nom;
+<     }
+< 
+<     /** Obtenir le choix de la stratégie tricheur: triche puis prend
+<      * l'avant dernière allumettes.
+<      * @return nombre d'allumettes à prendre.
+<      * @throws CoupInvalideException si le coup est interdit.
+<      */
+<     @Override
+<     public int getPrise(Jeu jeu, String nom) throws CoupInvalideException {
+---
+> package allumettes;
+> 
+> /** Défini les propriétés de base de la stratégie "rapide"
+>  * d'un joueur du jeu des allumettes.
+>  * @author  Julien Blanchon
+>  * @version 1.0
+>  */
+> public class Rapide implements Strategie {
+> 
+>     public static final String nom = "rapide";
+> 
+>     /** Obtenir le nom de la stratégie : rapide.
+>      * @return nom de la stratégie
+>      */
+>     @Override
+>     public String getNom() {
+>         return nom;
+>     }
+> 
+>     /** Obtenir le choix de la stratégie rapide: le plus grand nombre possible.
+>      * @see Jeu#getNombreAllumettes()
+>      * @see Jeu#PRISE_MAX
+>      * @return nombre d'allumettes à prendre.
+>      * @Range(from = 1, to = bound)
+>      */
+>     @Override
+>     public int getPrise(Jeu jeu, String nom) {
+
+allumettes/Jouer.java: line 33-37 [24]
+allumettes/Jouer.java: line 37-41
+< 						case Humain.nom : strategie = new Humain();
+< 							break;
+< 						case Naif.nom: strategie = new Naif();
+< 							break;
+< 						case Rapide.nom: strategie = new Rapide();
+---
+> 						case Rapide.nom: strategie = new Rapide();
+> 							break;
+> 						case Tricheur.nom: strategie = new Tricheur();
+> 							break;
+> 						case Expert.nom: strategie = new Expert();
+

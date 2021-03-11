@@ -1,0 +1,1 @@
+{"Name":"TP1_1","Hosts":[{"Name":"A","Type":"Client","Interfaces":"1"},{"Name":"B","Type":"Client","Interfaces":"1"}],"Links":[{"H1":"A","I1":"eth0","H2":"B","I2":"eth0"}],"Bridges":[]}

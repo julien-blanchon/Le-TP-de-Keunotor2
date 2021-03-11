@@ -1,0 +1,1 @@
+../../../tps/TP06/ExempleSchema2.java

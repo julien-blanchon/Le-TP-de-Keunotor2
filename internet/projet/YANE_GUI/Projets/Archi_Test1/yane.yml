@@ -1,0 +1,50 @@
+network:
+  name: Archi_Test1
+  version: 0.1
+  hosts:
+    - Client1
+      mode : netns
+      init : ./scripts/Client1
+ 
+    - Routeur1
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/Routeur1/etc:/
+ 
+    - Client2
+      mode : netns
+      init : ./scripts/Client2
+ 
+    - Routeur2
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/Routeur2/etc:/
+ 
+    - Client3
+      mode : netns
+      init : ./scripts/Client3
+ 
+ 
+    - Routeu3
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/Routeu3/etc:/
+ 
+    - ServeurWeb
+      mode : docker
+      image : apache_n7:latest
+      files : ./files/ServeurWeb/var:/
+ 
+  links :
+    - Client1:eth0!Routeur1:eth0
+    - Routeur2:eth0!Client2:eth0
+    - Routeur2:eth1!Routeur1:eth1
+    - Routeu3:eth0!Routeur2:eth2
+    - ServeurWeb:eth0!Routeu3:eth2
+ 
+  bridges:
+    - Switch0
+      interfaces: Client3:eth0!Routeu3:eth1!
+ 
+  consoles :
+    - all

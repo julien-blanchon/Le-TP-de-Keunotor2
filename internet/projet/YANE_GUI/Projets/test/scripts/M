@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ip link set dev eth0 up
+ip address add 2.0.0.1/24 dev eth0
+

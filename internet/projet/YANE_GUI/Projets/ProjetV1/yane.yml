@@ -1,0 +1,77 @@
+network:
+  name: ProjetV1
+  version: 0.1
+  hosts:
+    - Client1
+      mode : netns
+      init : ./scripts/Client1
+ 
+    - Client2
+      mode : netns
+      init : ./scripts/Client2
+ 
+    - BoxClient1
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/BoxClient1/etc:/
+ 
+    - BoxClient2
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/BoxClient2/etc:/
+ 
+    - Client3
+      mode : netns
+      init : ./scripts/Client3
+ 
+    - BoxClient3
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/BoxClient3/etc:/
+ 
+    - RouteurFAIAcces
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/RouteurFAIAcces/etc:/
+ 
+    - RouteurFAIInterconnexion
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/RouteurFAIInterconnexion/etc:/
+ 
+    - RouteurFAIServices
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/RouteurFAIServices/etc:/
+ 
+    - Web
+      mode : docker
+      image : apache_n7:latest
+      files : ./files/Web/var:/
+ 
+    - DNS
+      mode : docker
+      image : dns_n7:latest
+      files : ./files/DNS/etc:/
+ 
+    - FTP
+      mode : docker
+      image : ftp_n7:latest
+      files : ./files/FTP/etc:/
+ 
+  links :
+    - Client1:eth0!BoxClient1:eth0
+    - Client2:eth0!BoxClient2:eth0
+    - Client3:eth0!BoxClient3:eth0
+    - BoxClient3:eth1!RouteurFAIAcces:eth3
+    - BoxClient2:eth1!RouteurFAIAcces:eth2
+    - BoxClient1:eth1!RouteurFAIAcces:eth1
+    - RouteurFAIAcces:eth0!RouteurFAIInterconnexion:eth0
+    - RouteurFAIInterconnexion:eth1!RouteurFAIServices:eth0
+    - RouteurFAIServices:eth1!DNS:eth0
+    - RouteurFAIServices:eth2!Web:eth0
+    - RouteurFAIServices:eth3!FTP:eth0
+ 
+ 
+  consoles :
+    - all

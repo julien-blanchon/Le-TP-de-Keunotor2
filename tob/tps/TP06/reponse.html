@@ -1,0 +1,399 @@
+%%
+% Copyright (c) 2017 - 2021, Pascal Wagler;
+% Copyright (c) 2014 - 2021, John MacFarlane
+%
+% All rights reserved.
+%
+% Redistribution and use in source and binary forms, with or without
+% modification, are permitted provided that the following conditions
+% are met:
+%
+% - Redistributions of source code must retain the above copyright
+% notice, this list of conditions and the following disclaimer.
+%
+% - Redistributions in binary form must reproduce the above copyright
+% notice, this list of conditions and the following disclaimer in the
+% documentation and/or other materials provided with the distribution.
+%
+% - Neither the name of John MacFarlane nor the names of other
+% contributors may be used to endorse or promote products derived
+% from this software without specific prior written permission.
+%
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+% "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+% LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+% FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+% COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+% INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+% BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+% LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+% CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+% LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+% ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+% POSSIBILITY OF SUCH DAMAGE.
+%%
+
+%%
+% This is the Eisvogel pandoc LaTeX template.
+%
+% For usage information and examples visit the official GitHub page:
+% https://github.com/Wandmalfarbe/pandoc-latex-template
+%%
+
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*,table}{xcolor}
+%
+\documentclass[
+  12pt,
+  ,
+  paper=a4,
+  ,captions=tableheading
+]{scrartcl}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{setspace}
+\setstretch{1.2}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\definecolor{default-linkcolor}{HTML}{A50000}
+\definecolor{default-filecolor}{HTML}{A50000}
+\definecolor{default-citecolor}{HTML}{4077C0}
+\definecolor{default-urlcolor}{HTML}{4077C0}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdfauthor={Julien Blanchon},
+  pdflang={fr-FR},
+  pdfkeywords={tob, java},
+  hidelinks,
+  breaklinks=true,
+  pdfcreator={LaTeX via pandoc with the Eisvogel template}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=2.5cm,includehead=true,includefoot=true,centering,]{geometry}
+% add backlinks to footnote references, cf. https://tex.stackexchange.com/questions/302266/make-footnote-clickable-both-ways
+\usepackage{footnotebackref}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+% Make use of float-package and set default placement for figures to H.
+% The option H means 'PUT IT HERE' (as  opposed to the standard h option which means 'You may put it here if you like').
+\usepackage{float}
+\floatplacement{figure}{H}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\ifxetex
+    % See issue https://github.com/reutenauer/polyglossia/issues/127
+  \renewcommand*\familydefault{\sfdefault}
+    % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[]{}
+\else
+  \usepackage[main=]{babel}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\fi
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{TP 06 Tob}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Héritage comme spécialisation}
+\author{Julien Blanchon}
+\date{08-02-2020}
+
+
+
+%%
+%% added
+%%
+
+%
+% language specification
+%
+% If no language is specified, use English as the default main document language.
+%
+
+
+
+%
+% for the background color of the title page
+%
+\usepackage{pagecolor}
+\usepackage{afterpage}
+\usepackage[margin=2.5cm,includehead=true,includefoot=true,centering]{geometry}
+
+%
+% break urls
+%
+\PassOptionsToPackage{hyphens}{url}
+
+%
+% When using babel or polyglossia with biblatex, loading csquotes is recommended
+% to ensure that quoted texts are typeset according to the rules of your main language.
+%
+\usepackage{csquotes}
+
+%
+% captions
+%
+\definecolor{caption-color}{HTML}{777777}
+\usepackage[font={stretch=1.2}, textfont={color=caption-color}, position=top, skip=4mm, labelfont=bf, singlelinecheck=false, justification=raggedright]{caption}
+\setcapindent{0em}
+
+%
+% blockquote
+%
+\definecolor{blockquote-border}{RGB}{221,221,221}
+\definecolor{blockquote-text}{RGB}{119,119,119}
+\usepackage{mdframed}
+\newmdenv[rightline=false,bottomline=false,topline=false,linewidth=3pt,linecolor=blockquote-border,skipabove=\parskip]{customblockquote}
+\renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em}%
+\item\relax\color{blockquote-text}\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
+
+%
+% Source Sans Pro as the de­fault font fam­ily
+% Source Code Pro for monospace text
+%
+% 'default' option sets the default
+% font family to Source Sans Pro, not \sfdefault.
+%
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+    \usepackage[default]{sourcesanspro}
+  \usepackage{sourcecodepro}
+  \else % if not pdftex
+    \usepackage[default]{sourcesanspro}
+  \usepackage{sourcecodepro}
+
+  % XeLaTeX specific adjustments for straight quotes: https://tex.stackexchange.com/a/354887
+  % This issue is already fixed (see https://github.com/silkeh/latex-sourcecodepro/pull/5) but the
+  % fix is still unreleased.
+  % TODO: Remove this workaround when the new version of sourcecodepro is released on CTAN.
+  \ifxetex
+    \makeatletter
+    \defaultfontfeatures[\ttfamily]
+      { Numbers   = \sourcecodepro@figurestyle,
+        Scale     = \SourceCodePro@scale,
+        Extension = .otf }
+    \setmonofont
+      [ UprightFont    = *-\sourcecodepro@regstyle,
+        ItalicFont     = *-\sourcecodepro@regstyle It,
+        BoldFont       = *-\sourcecodepro@boldstyle,
+        BoldItalicFont = *-\sourcecodepro@boldstyle It ]
+      {SourceCodePro}
+    \makeatother
+  \fi
+  \fi
+
+%
+% heading color
+%
+\definecolor{heading-color}{RGB}{40,40,40}
+\addtokomafont{section}{\color{heading-color}}
+% When using the classes report, scrreprt, book,
+% scrbook or memoir, uncomment the following line.
+%\addtokomafont{chapter}{\color{heading-color}}
+
+%
+% variables for title, author and date
+%
+\usepackage{titling}
+\title{TP 06 Tob}
+\author{Julien Blanchon}
+\date{08-02-2020}
+
+%
+% tables
+%
+
+%
+% remove paragraph indention
+%
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+
+%
+%
+% Listings
+%
+%
+
+
+%
+% header and footer
+%
+\usepackage[headsepline,footsepline]{scrlayer-scrpage}
+
+\newpairofpagestyles{eisvogel-header-footer}{
+  \clearpairofpagestyles
+  \ihead[Page ]{TP 06 Tob}
+  \chead[]{}
+  \ohead[TP 06 Tob]{Page }
+  \ifoot[© ]{Julien Blanchon}
+  \cfoot[This is ]{This is }
+  \ofoot[Julien Blanchon]{© }
+  \addtokomafont{pageheadfoot}{\upshape}
+}
+\pagestyle{eisvogel-header-footer}
+
+%%
+%% end added
+%%
+
+\begin{document}
+
+%%
+%% begin titlepage
+%%
+\begin{titlepage}
+\newgeometry{left=6cm}
+\definecolor{titlepage-color}{HTML}{FFFFFF}
+\newpagecolor{titlepage-color}\afterpage{\restorepagecolor}
+\newcommand{\colorRule}[3][black]{\textcolor[HTML]{#1}{\rule{#2}{#3}}}
+\begin{flushleft}
+\noindent
+\\[-1em]
+\color[HTML]{000000}
+\makebox[0pt][l]{\colorRule[CCCCCC]{1.3\textwidth}{4pt}}
+\par
+\noindent
+
+{
+  \setstretch{1.4}
+  \vfill
+  \noindent {\huge \textbf{\textsf{TP 06 Tob}}}
+    \vskip 1em
+  {\Large \textsf{Héritage comme spécialisation}}
+    \vskip 2em
+  \noindent {\Large \textsf{Julien Blanchon}}
+  \vfill
+}
+
+
+\textsf{08-02-2020}
+\end{flushleft}
+\end{titlepage}
+\restoregeometry
+
+%%
+%% end titlepage
+%%
+
+\begin{abstract}
+blabla
+\end{abstract}
+
+
+\renewcommand*\contentsname{Table des matières}
+{
+\setcounter{tocdepth}{}
+\tableofcontents
+\newpage
+}
+\listoftables
+\listoffigures
+<h1 id="exercice-1-formaliser-le-schéma">Exercice 1 : Formaliser le schéma</h1>
+<p>Dans la question 3.2 du TP 5, nous avons défini le schéma comme plusieurs objets (points, points nommés et segments) qui sont référencés par des variables différentes. Il serait plus logique et pratique d’avoir une seule variable qui représente le schéma (on l’appellera naturellement schema). Comme un schéma est constitué d’un nombre variable d’éléments, on peut le représenter par un tableau. Si nous appelons X le type des éléments de ce tableau, nous pouvons alors écrire le code du listing 1</p>
+<ol type="1">
+<li>Indiquer à quelles conditions sur <code>X</code> les lignes suivantes compilent.</li>
+</ol>
+<div class="sourceCode" id="cb1" data-caption="test caption"><pre class="sourceCode Java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MaClasse<span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">this</span><span class="op">.</span><span class="fu">function</span><span class="op">{}</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><code class="sourceCode java"><span class="kw">class</span> Maclass<span class="op">{}</span></code></p>
+<p>Il faut que <code>X</code> soit un tableau dont les éléments ne sont pas privée pour pouvoir Point.afficher …</p>
+<ol start="2" type="1">
+<li>Quel code sera exécuté pour x.afficher() et x.translater(4, -3) ?</li>
+</ol>
+<p><code>Point.afficher()</code> et <code>Point.translater(double, double)</code></p>
+<ol start="3" type="1">
+<li>Indiquer les autres éléments à définir sur X ? Justifier la réponse.</li>
+</ol>
+<p>ø</p>
+<ol start="4" type="1">
+<li>Donner un nom plus significatif à X.</li>
+</ol>
+<p><code>SchemaTab</code> serait plus significatif pour X.</p>
+<h1 id="exercice-2-écrire-la-classe-x-et-adapter-lapplication">Exercice 2 : Écrire la classe X et adapter l’application</h1>
+<ol type="1">
+<li>Est-ce que l’on sait écrire le code des méthodes afficher ou translater de X ?</li>
+</ol>
+<p>Oui si tout les éléments de X possède les méthodes afficher et translater. Ce qui est la cas car X peut contenir soit un Point, soit un PointNomme, soit un Segment. Il serait judicieux de faire un interface: ObjectGeometrique.</p>
+<ol start="2" type="1">
+<li>Peut-on créer des instances de X ?</li>
+</ol>
+<p>Oui ?</p>
+<ol start="3" type="1">
+<li>Quels constructeurs définir sur X ?</li>
+</ol>
+<p>?</p>
+<ol start="4" type="1">
+<li>Quand ces constructeurs seront-ils appelés ?</li>
+</ol>
+<p>Lors de la création de X ?</p>
+<ol start="5" type="1">
+<li><p>Écrire le code de la classe X.</p></li>
+<li><p>Lister et effectuer les modifications à apporter aux autres classes de l’application.</p></li>
+</ol>
+<h1 id="exercice-3-construire-le-schéma-en-utilisant-les-listes">Exercice 3 : Construire le schéma en utilisant les listes</h1>
+<p>Au lieu d’utiliser un tableau comme dans l’exercice 2, on veut utiliser l’interface List et sa réalisation ArrayList du paquetage java.util (en particulier la méthode add et la structure de contrôle foreach).</p>
+<ol type="1">
+<li><p>Indiquer les avantages et inconvénients des listes par rapport aux tableaux.</p></li>
+<li><p>Construire le schéma en utilisant une liste.</p></li>
+</ol>
+<h1 id="exercice-4-définir-un-groupe">Exercice 4 : Définir un groupe</h1>
+<p>Dans un éditeur de schémas mathématiques, il serait pratique de pouvoir grouper plusieurs X pour les manipuler comme un seul et leur appliquer à tous, en une seule fois, la même opération (translater, afficher, etc.).</p>
+<ol type="1">
+<li><p>Sachant que la classe X est abstraite, la classe Groupe est-elle abstraite ou concrète ?</p></li>
+<li><p>Écrire la classe Groupe et l’utiliser (ExempleSchemaGroupe).</p></li>
+<li><p>On souhaite pouvoir mettre un groupe dans un groupe. Par exemple, on souhaite grouper les trois segments, puis ce groupe et le barycentre. Comment faire ?</p></li>
+</ol>
+
+\end{document}

@@ -1,0 +1,54 @@
+File Cercle.java: 574 tokens, 241 lines
+Total input: 1 file (1 new, 0 old), 574 tokens
+
+Cercle.java: line 150-172 [41]
+Cercle.java: line 172-195
+<         return "C" + rayon + "@" + this.centre;
+<     }
+< 
+<     /** Modifier le centre du cercle.
+<      * @param centre nouveau centre du cercle
+<      * @throws AssertionError si centre est non instancier
+<      * @see Cercle#rayon
+<      * @see Cercle#getCentre() (deepcopy)
+<      */
+<     public void setCentre(Point centre) throws AssertionError {
+<         assert centre != null;
+<         this.centre = centre;
+<     }
+< 
+<     /** Modifier le rayon du cercle.
+<      * @param rayon nouveau rayon du cercle
+<      * @throws AssertionError si rayon est négatif
+<      * @see Cercle#rayon
+<      * @see Cercle#getRayon()
+<      */
+<     public void setRayon(double rayon) throws AssertionError {
+<         assert rayon > 0.0;
+<         this.rayon = rayon;
+---
+>         this.rayon = rayon;
+>     }
+> 
+>     /** Modifier la couleur du cercle.
+>      * @param couleur nouvelle couleur du cercle
+>      * @throws AssertionError si couleur est non instancier.
+>      * @see Cercle#couleur
+>      * @see Cercle#getCouleur()
+>      */
+>     public void setCouleur(Color couleur) throws AssertionError {
+>         assert couleur != null;
+>         this.couleur = couleur;
+>     }
+> 
+>     /** Modifier le diametre du cercle.
+>      * @param diametre nouveau diametre du cercle
+>      * @throws AssertionError si diametre est négatif
+>      * @see Cercle#rayon
+>      * @see Cercle#setRayon(double)
+>      * @see Cercle#getDiametre()
+>      */
+>     public void setDiametre(double diametre) throws AssertionError {
+>         assert diametre > 0.0;
+>         this.setRayon(diametre / 2.0);
+

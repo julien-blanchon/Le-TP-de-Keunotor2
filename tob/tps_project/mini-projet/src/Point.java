@@ -1,0 +1,1 @@
+../../../tps/mini-projet/Point.java

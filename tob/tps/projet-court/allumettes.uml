@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>allumettes</OriginalElement>
+  <nodes>
+    <node x="218.0" y="395.0">allumettes.TricheurTest</node>
+    <node x="0.0" y="470.0">allumettes.RapideTest</node>
+    <node x="349.5" y="165.0">allumettes.CoupInvalideException</node>
+    <node x="171.0" y="470.0">allumettes.ExpertTest</node>
+    <node x="0.0" y="245.0">allumettes.JeuProcuration</node>
+    <node x="279.5" y="0.0">allumettes.Strategie</node>
+    <node x="0.0" y="90.0">allumettes.Expert</node>
+    <node x="444.0" y="545.0">allumettes.Jouer</node>
+    <node x="0.0" y="545.0">allumettes.NaifTest</node>
+    <node x="342.0" y="470.0">allumettes.HumainTest</node>
+    <node x="156.0" y="545.0">allumettes.Arbitre</node>
+    <node x="513.0" y="470.0">allumettes.JoueurTest</node>
+    <node x="576.0" y="90.0">allumettes.Lente</node>
+    <node x="115.0" y="90.0">allumettes.Rapide</node>
+    <node x="0.0" y="395.0">allumettes.AbandonException</node>
+    <node x="476.0" y="90.0">allumettes.Naif</node>
+    <node x="0.0" y="320.0">allumettes.ConfigurationException</node>
+    <node x="118.25" y="165.0">allumettes.Jeu</node>
+    <node x="178.0" y="245.0">allumettes.JeuReel</node>
+    <node x="345.0" y="90.0">allumettes.Tricheur</node>
+    <node x="230.0" y="90.0">allumettes.Humain</node>
+    <node x="304.0" y="545.0">allumettes.Joueur</node>
+    <node x="326.0" y="245.0">allumettes.OperationInterditeException</node>
+    <node x="265.0" y="320.0">allumettes.JeuProcurationTest</node>
+    <node x="405.0" y="395.0">allumettes.JeuReelTest</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="allumettes.Lente" target="allumettes.Strategie">
+      <point x="0.0" y="-15.0" />
+      <point x="619.5" y="50.0" />
+      <point x="388.58333333333326" y="50.0" />
+      <point x="49.58333333333326" y="15.0" />
+    </edge>
+    <edge source="allumettes.OperationInterditeException" target="allumettes.CoupInvalideException">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="allumettes.Tricheur" target="allumettes.Strategie">
+      <point x="0.0" y="-15.0" />
+      <point x="400.5" y="70.0" />
+      <point x="348.91666666666674" y="70.0" />
+      <point x="9.916666666666742" y="15.0" />
+    </edge>
+    <edge source="allumettes.Expert" target="allumettes.Strategie">
+      <point x="0.0" y="-15.0" />
+      <point x="47.5" y="50.0" />
+      <point x="289.41666666666674" y="50.0" />
+      <point x="-49.58333333333326" y="15.0" />
+    </edge>
+    <edge source="allumettes.Rapide" target="allumettes.Strategie">
+      <point x="0.0" y="-15.0" />
+      <point x="162.5" y="60.0" />
+      <point x="309.25" y="60.0" />
+      <point x="-29.75" y="15.0" />
+    </edge>
+    <edge source="allumettes.Humain" target="allumettes.Strategie">
+      <point x="0.0" y="-15.0" />
+      <point x="277.5" y="70.0" />
+      <point x="329.08333333333326" y="70.0" />
+      <point x="-9.916666666666742" y="15.0" />
+    </edge>
+    <edge source="allumettes.JeuReel" target="allumettes.Jeu">
+      <point x="0.0" y="-15.0" />
+      <point x="229.5" y="220.0" />
+      <point x="172.25" y="220.0" />
+      <point x="18.0" y="15.0" />
+    </edge>
+    <edge source="allumettes.Naif" target="allumettes.Strategie">
+      <point x="0.0" y="-15.0" />
+      <point x="516.0" y="60.0" />
+      <point x="368.75" y="60.0" />
+      <point x="29.75" y="15.0" />
+    </edge>
+    <edge source="allumettes.JeuProcuration" target="allumettes.Jeu">
+      <point x="0.0" y="-15.0" />
+      <point x="79.0" y="220.0" />
+      <point x="136.25" y="220.0" />
+      <point x="-18.0" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="331.5" y="287.5" />
+  <SelectedNodes>
+    <node>allumettes.TricheurTest</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

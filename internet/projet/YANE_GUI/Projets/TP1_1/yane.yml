@@ -1,0 +1,18 @@
+network:
+  name: TP1_1
+  version: 0.1
+  hosts:
+    - A
+      mode : netns
+      init : ./scripts/A
+ 
+    - B
+      mode : netns
+      init : ./scripts/B
+ 
+  links :
+    - A:eth0!B:eth0
+ 
+ 
+  consoles :
+    - all

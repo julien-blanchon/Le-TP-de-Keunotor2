@@ -1,0 +1,68 @@
+Date de l'évaluation : mer. 03 mars 2021 15:21:11 CET
+
+!!! Il est interdit de changer Jeu.java (voir evaluations/evaluation1/Jeu.java.diff)
+
+Nombre de similitudes (voir evaluations/evaluation1/sim_java.txt) : 5
+Les similitudes indiquent généralement du code à restructurer.
+
+Erreurs checkstyle (différentes/types) : 0/0	(voir evaluations/evaluation1//checkstyle.log)
+
+Utilisation de 'Scanner' : ok
+	allumettes/Humain.java:    /**Scanner communs à l'ensemble des stratégie Humaine.*/
+	allumettes/Humain.java:    private static final Scanner SCANNER = new Scanner(System.in);
+	allumettes/Humain.java:     * @see Scanner
+
+Utilisation de 'split' : ok
+	allumettes/Jouer.java:					String[] parts = arg.split("@");
+
+Utilisation de 'Random' : ok
+	allumettes/Naif.java:     * @see java.util.Random
+	allumettes/Naif.java:        java.util.Random random = new java.util.Random();
+
+Utilisation de '3' : ok
+
+Utilisation de 'System.exit' : ok
+
+Compilation de Jouer.java : OK.
+Compilation de Arbitre.java : OK.
+Compilation de HumainTest.java : OK.
+Compilation de JoueurTest.java : OK.
+Compilation de TricheurTest.java : OK.
+Compilation de Lente.java : OK.
+Compilation de NaifTest.java : OK.
+Compilation de ExpertTest.java : OK.
+Compilation de RapideTest.java : OK.
+Compilation de JeuReelTest.java : OK.
+Compilation de JeuProcurationTest.java : OK.
+Test exemplePresqueSujet : ok
+Test exempleTricheurSujet : ok
+Test exempleConfiantTricheurSujet : ok
+Test exempleRobustesse : ok
+Test exempleHumainTricheurExpert : ok
+Test exempleLucLea : ok
+Test exempleRapideRapide : ok
+Test exempleTricheurExpert : ok
+
+On recommence avec les classes/interfaces fournies : Jeu ConfigurationException CoupInvalideException
+Compilation de Jouer.java : OK.
+Compilation de Arbitre.java : OK.
+
+Vérification du respect du diagramme de classe...
+Test FormeTest : OK (2 tests)	(voir evaluations/evaluation1/FormeTest.log)
+
+Compilation de HumainTest.java : OK.
+Test allumettes.HumainTest : OK (2 tests)	(voir evaluations/evaluation1/allumettes.HumainTest.log)
+Compilation de JoueurTest.java : OK.
+Test allumettes.JoueurTest : OK (4 tests)	(voir evaluations/evaluation1/allumettes.JoueurTest.log)
+Compilation de TricheurTest.java : OK.
+Test allumettes.TricheurTest : OK (2 tests)	(voir evaluations/evaluation1/allumettes.TricheurTest.log)
+Compilation de NaifTest.java : OK.
+Test allumettes.NaifTest : OK (3 tests)	(voir evaluations/evaluation1/allumettes.NaifTest.log)
+Compilation de ExpertTest.java : OK.
+Test allumettes.ExpertTest : OK (3 tests)	(voir evaluations/evaluation1/allumettes.ExpertTest.log)
+Compilation de RapideTest.java : OK.
+Test allumettes.RapideTest : OK (4 tests)	(voir evaluations/evaluation1/allumettes.RapideTest.log)
+Compilation de JeuReelTest.java : OK.
+Test allumettes.JeuReelTest : OK (7 tests)	(voir evaluations/evaluation1/allumettes.JeuReelTest.log)
+Compilation de JeuProcurationTest.java : OK.
+Test allumettes.JeuProcurationTest : OK (5 tests)	(voir evaluations/evaluation1/allumettes.JeuProcurationTest.log)

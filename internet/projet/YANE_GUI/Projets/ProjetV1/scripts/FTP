@@ -1,0 +1,18 @@
+#!/bin/bash
+echo "Configuration FTP ..."
+
+ip addr add 123.51.251.194/28 dev eth0
+ip link set dev eth0 up
+ip route add default via 123.51.251.193/28
+
+#création de l'utilisateur pour le ftp
+useradd ftpusr
+echo "ftpusr:ftpusr" | chpasswd
+mkdir /home/ftpusr
+chown ftpusr /home/ftpusr
+usermod --shell /bin/bash ftpusr
+
+#Lancer le serveur FTP
+hostname FTP
+echo "123.51.251.194 FTP" >> /etc/hosts
+/etc/init.d/proftpd start
