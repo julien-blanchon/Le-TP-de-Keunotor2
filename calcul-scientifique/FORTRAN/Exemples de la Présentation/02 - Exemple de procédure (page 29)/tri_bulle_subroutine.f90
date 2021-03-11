@@ -1,6 +1,6 @@
 program tri
 
-! déclaration des constantes et des variables
+! dï¿½claration des constantes et des variables
 
 implicit none
 
@@ -20,11 +20,11 @@ subroutine tribulle(t, m)
 
 implicit none 
 
-! déclaration des paramètres et de leur mode
+! dï¿½claration des paramï¿½tres et de leur mode
 real, dimension(m), intent(inout) :: t
 integer, intent(in) :: m
 
-! déclaration des variables locales
+! dï¿½claration des variables locales
 integer:: i, j
 real :: aux
 
@@ -37,8 +37,8 @@ do i = 1, m-1
     end if
     ! t(j) <= t(j+1)
   end do
-  ! tableau t(m-i+1:m) trié
+  ! tableau t(m-i+1:m) triï¿½
 end do
-! tableau t(1:m) trié
+! tableau t(1:m) triï¿½
 
 end subroutine tribulle

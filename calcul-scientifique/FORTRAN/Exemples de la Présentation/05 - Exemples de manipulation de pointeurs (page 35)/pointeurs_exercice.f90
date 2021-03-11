@@ -9,16 +9,16 @@ k =  7
 p => i
 q => j
 r => k
-q = p*3
+q = p*3 !12*3 = 36 (j)
 print *, j
 k = j
 q = 9
-print *, j
+print *, j !9 (j)
 r = q + p
-print *, k, r
+print *, k, r !k:21 (k), r:21 (k)
 q => k 
 k = q + k
-print *, k, r
+print *, k, r !k:42 (k), r:42 (k)
 !p => 3*q
 !p => 3*i
 !j => 9

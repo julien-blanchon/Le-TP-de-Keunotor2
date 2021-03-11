@@ -1,22 +1,22 @@
 program nb_or
 
-  ! déclarations des constantes et des variables
+  ! dï¿½clarations des constantes et des variables
 
-  ! implicit none => pour être obligé de déclarer toutes les variables
+  ! implicit none => pour ï¿½tre obligï¿½ de dï¿½clarer toutes les variables
   implicit none
 
   ! une constante
   real, parameter :: epsilon = 1.e-10
 
-  ! des variables scalaires réelles
+  ! des variables scalaires rï¿½elles
   real :: fib, fib_1, fib_2
   real :: nombre_dor, nombre_dor_prec
   real :: nombre_dor_exact
 
-  ! un booléen
+  ! un boolï¿½en
   logical:: convergence
 
-  ! début des instructions
+  ! dï¿½but des instructions
 
   ! initialisations
 
@@ -43,7 +43,7 @@ program nb_or
 
   nombre_dor_exact = (1.+sqrt(5.))/2.
 
-  ! affichage des résultats à l'écran
+  ! affichage des rï¿½sultats ï¿½ l'ï¿½cran
   print *,'Limite de la suite de Fibonacci :', nombre_dor
   print *,'Nombre d''or', nombre_dor_exact
   print *, 'Racine de x**2 - x - 1', nombre_dor**2 - nombre_dor - 1

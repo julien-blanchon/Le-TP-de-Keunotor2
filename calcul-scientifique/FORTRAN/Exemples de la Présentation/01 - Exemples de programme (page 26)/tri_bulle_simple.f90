@@ -1,6 +1,6 @@
 program tribulle
 
-! déclaration des constantes et des variables
+! dï¿½claration des constantes et des variables
 
 implicit none
 
@@ -21,9 +21,9 @@ do i = 1, n-1
     end if
     ! t(j) <= t(j+1)
   end do
-  ! tableau t(n-i+1:n) trié
+  ! tableau t(n-i+1:n) triï¿½
 end do
-! tableau t(1:n) trié
+! tableau t(1:n) triï¿½
 
 print *, 'tri croissant', t
 
