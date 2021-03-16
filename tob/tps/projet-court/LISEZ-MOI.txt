@@ -13,8 +13,8 @@ Toutes les durées sont à saisir en heures.  Par exemple, si vous avez passé
 1h45, il faudra indiquer 1.75.  Si vous avez passé 2h30, il faudra indiquer
 2.5.
 
-* Temps passé sur la V1 (en h) : 4h
-* Temps passé sur la V2 (en h) : 3h
+* Temps passé sur la V1 (en h) : 4
+* Temps passé sur la V2 (en h) : 3
 
 
 =====[ Questions ]==============================================================
@@ -26,7 +26,6 @@ comme vérifiée par le compilateur ?
 
 *OperationInterditeException* traduit un **appel incorrect de méthode** il est 
 donc cohérant de prendre une exception non vérifiée.
-
 
 --------------------------------------------------------------------------------
 Expliquer ce qu'il faut faire pour ajouter un nouveau niveau de jeu, par
