@@ -1,10 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.border.Border;
 import javax.swing.event.*;
 import java.awt.event.*;
 import java.util.*;
-import javax.swing.border.*;
 
 /** Programmation d'un jeu de Morpion avec une interface graphique Swing.
   *
@@ -21,9 +19,9 @@ public class MorpionSwing {
 	private static final Map<ModeleMorpion.Etat, ImageIcon> images
 		= new HashMap<ModeleMorpion.Etat, ImageIcon>();
 	static {
-		images.put(ModeleMorpion.Etat.VIDE, new ImageIcon("src/vide.jpg"));
-		images.put(ModeleMorpion.Etat.CROIX, new ImageIcon("src/croix.jpg"));
-		images.put(ModeleMorpion.Etat.ROND, new ImageIcon("src/rond.jpg"));
+		images.put(ModeleMorpion.Etat.VIDE, new ImageIcon("blanc.jpg"));
+		images.put(ModeleMorpion.Etat.CROIX, new ImageIcon("croix.jpg"));
+		images.put(ModeleMorpion.Etat.ROND, new ImageIcon("rond.jpg"));
 	}
 
 // Choix de réalisation :
@@ -83,27 +81,6 @@ public class MorpionSwing {
 		this.fenetre = new JFrame("Morpion");
 		this.fenetre.setLocation(100, 200);
 
-		// Ajouter les elts dans la fenêtre principale:
-		JPanel monContenu = new JPanel(new GridLayout(4, 3));
-		Border border = BorderFactory.createLineBorder(Color.black);
-		monContenu.setBorder(border);
-		monContenu.add(this.cases[0][0]);
-		monContenu.add(this.cases[0][1]);
-		monContenu.add(this.cases[0][2]);
-		monContenu.add(this.cases[1][0]);
-		monContenu.add(this.cases[1][1]);
-		monContenu.add(this.cases[1][2]);
-		monContenu.add(this.cases[2][0]);
-		monContenu.add(this.cases[2][1]);
-		monContenu.add(this.cases[2][2]);
-		monContenu.add(boutonNouvellePartie);
-		monContenu.add(joueur);
-		monContenu.add(boutonQuitter);
-
-		this.boutonNouvellePartie.addActionListener(new ActionNouvellePartie());
-		this.boutonQuitter.addActionListener(new ActionQuiter());
-		this.fenetre.add(monContenu);
-
 		// Construire le contrôleur (gestion des événements)
 		this.fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -143,19 +120,4 @@ public class MorpionSwing {
 		});
 	}
 
-	private class ActionQuiter implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			System.out.println("On quitte !");
-			fenetre.dispose();
-		}
-	}
-
-	private class ActionNouvellePartie implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			recommencer();
-		}
-	}
 }

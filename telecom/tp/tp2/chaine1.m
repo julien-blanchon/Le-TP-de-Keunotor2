@@ -30,20 +30,21 @@ alpha = 0.5; %roll off fixe la largeur de bande
 h1 = ones(1, Ns);
 span = 8;
 h2 = rcosdesign(alpha, span, Ns); %Reponse impulsionnelle de racine de cosinus sur ́elev ́e
-x1 = filter(h1, 1, map);
-x2 = filter(h2, 1, map);
+x1 = filter_nodelay(h1, 1, map);
+x2 = filter_nodelay(h2, 1, map);
 
 %% Filtre canal
 hc1 = [1, zeros(1, Ns-1)]; %Reponse impulsionnelle de type dirac
 hc2 = [1, zeros(1, Ns-1)]; %Reponse impulsionnelle de type dirac
-x1c = filter(hc1, 1, x1);
-x2c = filter(hc2, 1, x2);
+x1c = filter_nodelay(hc1, 1, x1);
+x2c = filter_nodelay(hc2, 1, x2);
 
 %% Filtre reception
 hr1 = ones(1, Ns); %Reponse impulsionnelle de type rectangulaire de duree Ts=Ns*Te
 hr2 = rcosdesign(alpha, span, Ns); %Reponse impulsionnelle de type rectangulaire de duree Ts=Ns*Te
-x1r = filter(hr1, 1, x1c);
-x2r = filter(hr2, 1, x2c);
+x1r = filter_nodelay(hr1, 1, x1c);
+x2r = filter_nodelay(hr2, 1, x2c);
+%x1r = filter_nodelay(conv(conv(h1, hc1), hr1), 1, map);
 
 %% Reponse impulsionnelle g et diagramme de l'oeil
 g1 = conv(h1, hr1);
@@ -57,7 +58,7 @@ subplot(212);
 plot(g2);
 legend("g_{2}");
 title('Réponse Impulsionnelle filtre 2');
-saveas(fig, "Chaine1_g.png");
+saveas(fig, "figures/Chaine1_g.png");
 %Diagramme de l'oeil
 fig = figure();
 subplot(211);
@@ -68,21 +69,19 @@ subplot(212);
 plot(reshape(x2r, [Ns, N]))
 hold off;
 title("Diagramme de l'oeil filtre 2");
-saveas(fig, "Chaine1_Oeil.png");
+saveas(fig, "figures/Chaine1_Oeil.png");
 
 %% Echantillonnage
 % Premiere chaine
-n01 = 8;
-z1 = x1r(n01:Ns:end);
-n02 = 1;
+n01 = 2; %Cf diagrame de l'oeil
+z1 = x1r(n01:Ns:end); 
+n02 = 1; %Cf diagrame de l'oeil
 z2 = x2r(n02:Ns:end);
-retard = span; % retard en symbole ! =8
-z2 = [z2(retard+1:end) zeros(1, retard)];
 
 %% Decision+Demapping
 y1 = (sign(z1)+1)/2;
 y2 = (sign(z2)+1)/2;
 
 %% Taux Erreur Binaire
-t1 = mean(y1~=bits);
-t2 = mean(y2~=bits);
+t1 = mean(y1~=bits)
+t2 = mean(y2~=bits)

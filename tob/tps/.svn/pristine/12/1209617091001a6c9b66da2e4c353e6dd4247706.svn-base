@@ -1,5 +1,0 @@
-Début de la vérification...
-[ERROR] JeuReel.java:55:37: Il manque une espace avant '{'. [WhitespaceAround]
-[ERROR] JeuProcuration.java:56:68: Il manque une espace après '-'. [WhitespaceAround]
-[ERROR] JeuProcuration.java:56:68: Il manque une espace avant '-'. [WhitespaceAround]
-Vérification terminée.

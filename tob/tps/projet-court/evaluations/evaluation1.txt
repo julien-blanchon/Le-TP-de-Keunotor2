@@ -1,4 +1,4 @@
-Date de l'évaluation : dim. 07 mars 2021 21:51:07 CET
+Date de l'évaluation : ven. 19 mars 2021 12:38:09 CET
 
 Nombre de similitudes (voir evaluations/evaluation1/sim_java.txt) : 5
 Les similitudes indiquent généralement du code à restructurer.
@@ -12,17 +12,25 @@ Procuration sur le jeu réel : allumettes/JeuProcuration.java (ok)
 OperationInterditeException, levée dans : allumettes/JeuProcuration.java (ok)
 OperationInterditeException, récupérée dans : allumettes/Arbitre.java (ok)
 
+Throwable, Exception et RuntimeException ne devraient pas être récupérées car trop générales... ok
+
+Autres exceptions récupérées :
+  | allumettes/Arbitre.java:46:            } catch (AbandonException e) {
+  | allumettes/Arbitre.java:109:            } catch (CoupInvalideException e) {
+  | allumettes/Humain.java:96:        } catch (NumberFormatException e) {
+  | allumettes/Jouer.java:69:       } catch (ConfigurationException e) {
+
 Utilisation de 'Scanner' : ok
-	allumettes/Humain.java:    /**Scanner communs à l'ensemble des stratégie Humaine.*/
-	allumettes/Humain.java:    private static final Scanner SCANNER = new Scanner(System.in);
-	allumettes/Humain.java:     * @see Scanner
+  | allumettes/Humain.java:15:    /**Scanner communs à l'ensemble des stratégie Humaine.*/
+  | allumettes/Humain.java:16:    private static final Scanner SCANNER = new Scanner(System.in);
+  | allumettes/Humain.java:61:     * @see Scanner
 
 Utilisation de 'split' : ok
-	allumettes/Jouer.java:					String[] parts = arg.split("@");
+  | allumettes/Jouer.java:33:                   String[] parts = arg.split("@");
 
 Utilisation de 'Random' : ok
-	allumettes/Naif.java:     * @see java.util.Random
-	allumettes/Naif.java:        java.util.Random random = new java.util.Random();
+  | allumettes/Naif.java:23:     * @see java.util.Random
+  | allumettes/Naif.java:30:        java.util.Random random = new java.util.Random();
 
 Utilisation de '3' : ok
 
@@ -47,6 +55,8 @@ Test exempleHumainTricheurExpert : ok
 Test exempleLucLea : ok
 Test exempleRapideRapide : ok
 Test exempleTricheurExpert : ok
+
+Test RobustesseTest : OK (25 tests)	(voir evaluations/evaluation1/RobustesseTest.log)
 
 On recommence avec les classes/interfaces fournies : Jeu ConfigurationException CoupInvalideException
 Compilation de Jouer.java : OK.
