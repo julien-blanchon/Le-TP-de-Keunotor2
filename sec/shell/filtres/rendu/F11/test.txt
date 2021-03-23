@@ -1,0 +1,26 @@
+Commandes avancées
+Le but de ce TP est l'apprentissage de quelques commandes shell permettant le filtrage et le parcours d'arborescences : find, tr, grep, wc, tail, head, cut, cat.
+Afficher le nom de tous les fichiers dans la sous-arborescence du répertoire courant possédant le suffixe .o.
+
+Compter le nombre de fichiers avec l'extension .o présents dans la sous-arborescence du répertoire courant.
+
+Supprimer tous les fichiers core non vides présents dans la sous-arborescence du répertoire courant.
+
+Calculer la somme du nombre de caractères présents dans tous les fichiers ordinaires de l'arborescence issue du répertoire courant.
+
+Compter le nombre de lignes où apparaît une chaîne dans tous les fichiers du répertoire courant.
+
+Compter le nombre de lignes contenant bash parmi les 20 premières lignes du fichier /etc/passwd
+
+Lister les caractéristiques du troisième objet (objet = fichier ou répertoire) du répertoire courant dans l'ordre chronologique de modification.
+
+Compter le nombre de voyelles dans un fichier donné.
+
+Compter le nombre d'occurrences d'une chaîne (sans espace) dans un fichier. On ne compte qu'une occurrence du mot recherché par mot du fichier (ba dans ``baba babababa ba'' apparaît trois fois), et il peut se trouver plusieurs occurrences du mot recherché sur une même ligne. Le délimiteur entre les mots du fichier est l'espace.
+
+Lister pour tous les répertoires contenus dans le répertoire courant les informations suivantes : nom du propriétaire, nom du répertoire, date de dernière modification.
+
+Calculer la longueur de la plus longue ligne d'un fichier donné.
+
+
+Solutions

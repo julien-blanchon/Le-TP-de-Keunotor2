@@ -1,0 +1,5 @@
+#!/bin/sh
+IFS=$'\n'
+for line in $(cat ${1}); do
+   echo $line | wc -c
+done | sort -n -r | head -n 1 | xargs -J "%" expr "%" - 1

@@ -1,0 +1,17 @@
+  rm ./files/BoxClient1/etc/scripts/init
+  rm ./files/RouteurFAIAcces/etc/scripts/init
+  rm ./files/RouteurFAIInter/etc/scripts/init
+  rm ./files/RouteurFAIService/etc/scripts/init
+  rm ./files/DNS/etc/scripts/init
+  rm ./files/WEB/var/scripts/init
+  rm ./files/FTP/etc/scripts/init
+  sudo ./yane -k > /dev/null 2> /dev/null
+  #On supprime tout les namespaces
+  sudo ip -all netns delete > /dev/null
+
+  #On supprime tout les dockers
+  if [ `sudo docker ps -a -q | wc -l` != 0 ] ; then
+    sudo docker stop `sudo docker ps -a -q` > /dev/null
+    sudo docker rm `sudo docker ps -a -q` > /dev/null
+  fi
+fi

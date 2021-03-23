@@ -1,0 +1,14 @@
+#!/bin/bash
+chaine=""
+
+if [[ $1 ]]
+then
+	for letter in $(echo $1 |fold -w 1)
+	do
+		chaine="$letter$chaine"
+	done
+else
+	echo "inv <chaîne non vide>"
+fi
+
+echo $chaine

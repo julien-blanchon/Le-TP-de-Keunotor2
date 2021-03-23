@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ -z $1 ]
+then
+	find . -name "core" -mindepth 2 -type f -size +0 -exec rm -f '{}' \;
+else
+	find $* -name "core" -mindepth 2 -type f -size +0 -exec rm -f '{}' \;
+fi
+# $* = 'arg1 arg2 arg3 ...'
+# -z $1 true si $1 est chaine vide.

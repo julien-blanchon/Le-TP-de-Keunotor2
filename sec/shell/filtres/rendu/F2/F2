@@ -1,0 +1,2 @@
+#!/bin/sh
+find . -name "*.o" -mindepth 1 -type f | wc -l

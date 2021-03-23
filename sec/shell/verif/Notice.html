@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h2 id="avertissement">Avertissement</h2>
+<p>Le script de vérification <code>verif.sh</code> doit être considéré comme un simple outil mis à votre disposition, pour vous fournir une indication quant à la viabilité de vos réponses, et non comme une application de validation automatique de votre travail. Simplement, si vous passez la vérification, vous pouvez avoir bon espoir quant à l'évaluation effective. Et inversement.</p>
+<p>En particulier :</p>
+<ul>
+<li>il est inutile de modifier le script pour qu'il donne des réponses <code>OK</code>: la validation se fera sur nos propres outils.</li>
+<li>le script n'est pas protégé contre les erreurs résultant de (mauvaises) actions liées à l'exécution de vos programmes. Par exemple si vos commandes détruisent des fichiers de manière intempestive, le script de vérification peut devenir invalide. Il est donc prudent de prévoir une sauvegarde de l'original, si vous voulez être prémunis contre ce genre d'accidents.</li>
+<li>en revanche, le script de vérification fonctionne bien avec des réponses correctes. Par conséquent, si une erreur est signalée sur une ligne du script, vous pouvez être quasi-certains que cela découle d'une erreur dans l'exercice qui est en cours de test autour de cette ligne, et non pas dans le script de test.</li>
+</ul>
+<h2 id="conventions-de-nommage">Conventions de nommage</h2>
+<p>Pour que le script de vérification <code>verif.sh</code> puisse être appliqué :</p>
+<ul>
+<li>pour chaque question, la réponse devra être fournie dans un fichier distinct</li>
+<li>le nom du fichier réponse sera <strong>exactement</strong> composé du numéro de la question, précédé d'un 'F' si la question est un exercice sur les filtres, et d'un 'S' si la question est un exercice sur les scripts.<br />
+Par exemple, 'F8' serait le nom du fichier contenant la réponse à l'exercice 8 du TP filtres.</li>
+<li>les fichiers contenant les réponses devront être placés dans le même répertoire que <code>verif.sh</code>, au même niveau que <code>verif.sh</code>.</li>
+<li>les fichiers contenant les réponses devront être exécutables (appliquer <code>chmod</code>au besoin)</li>
+<li>le répertoire contenant <code>verif.sh</code> ne devra pas être modifié, en dehors de l'ajout des fichiers de réponse.</li>
+</ul>
+<h2 id="conventions-de-lancement">Conventions de lancement</h2>
+<p>Pour les exercices du TP filtres, les énoncés font souvent mention d'un &quot;fichier donné&quot;. Pour le script de vérification, cela est compris comme un fichier donné <em>en paramètre</em>, et le script de vérification s'attend à ce que la réponse désigne ce fichier comme <code>$1</code>. Par exemple, pour l'énoncé<br />
+&quot;Afficher les 10 premières lignes d'un fichier donné&quot;<br />
+la réponse attendue serait<br />
+<code>head $1</code></p>
+<h2 id="appel-et-résultats-du-script-de-vérification">Appel et résultats du script de vérification</h2>
+<p>Le script <code>verif.sh</code> doit être lancé depuis un terminal, le répertoire courant étant le répertoire contenant <code>verif.sh</code>.</p>
+<p>Le script <code>verif.sh</code> vérifie les réponses dans l'ordre lexicographique des noms de fichier. Si une réponse est manquante ou en échec le script affiche <code>KO</code> pour cette réponse, sinon il affiche <code>OK</code>.<br />
+Notez que la mention <code>OK</code> est une condition nécessaire pour que la réponse soit juste, mais que ce n'est pas une condition suffisante.</p>
+<p>Lorsque le script <code>verif.sh</code> se termine, il affiche un message <code>fini</code>. Il est possible qu'une réponse provoque le blocage du script. Dans ce cas, il faut tuer le processus exécutant le script, et corriger (ou supprimer/renommer) la réponse ayant provoqué le blocage (qui devrait être la réponse suivant la dernière réponse pour laquelle <code>KO</code> ou <code>OK</code> a été affiché)</p>
+</body>
+</html>

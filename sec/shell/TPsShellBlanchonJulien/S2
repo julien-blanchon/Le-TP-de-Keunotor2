@@ -1,0 +1,8 @@
+#!/bin/bash
+
+reponse="n"
+while [[ $reponse = "" || ! $reponse = "o" ]]
+do
+	echo "Etes-vous satisfait ? (o/n)";
+	read reponse;
+done

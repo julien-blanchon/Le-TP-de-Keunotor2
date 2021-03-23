@@ -1,0 +1,97 @@
+{
+    "Name": "ProjetV2",
+    "Hosts": [
+    {
+        "Name": "Client1",
+        "Type": "Client",
+        "Interfaces": "1"
+    },
+    {
+        "Name": "BoxClient1",
+        "Type": "Routeur",
+        "Interfaces": "2"
+    },
+    {
+        "Name": "RouteurFAIAcces",
+        "Type": "Routeur",
+        "Interfaces": "2"
+    },
+    {
+        "Name": "RouteurFAIInter",
+        "Type": "Routeur",
+        "Interfaces": "3"
+    },
+    {
+        "Name": "RouteurFAIService",
+        "Type": "Routeur",
+        "Interfaces": "4"
+    },
+    {
+        "Name": "Switch1",
+        "Type": "Switch",
+        "Interfaces": "16"
+    },
+    {
+        "Name": "DNS",
+        "Type": "DNS",
+        "Interfaces": "1"
+    },
+    {
+        "Name": "WEB",
+        "Type": "WEB",
+        "Interfaces": "1"
+    },
+    {
+        "Name": "FTP",
+        "Type": "FTP",
+        "Interfaces": "1"
+    }],
+    "Links": [
+    {
+        "H1": "Client1",
+        "I1": "eth0",
+        "H2": "BoxClient1",
+        "I2": "eth0"
+    },
+    {
+        "H1": "BoxClient1",
+        "I1": "eth1",
+        "H2": "RouteurFAIAcces",
+        "I2": "eth0"
+    },
+    {
+        "H1": "RouteurFAIAcces",
+        "I1": "eth1",
+        "H2": "RouteurFAIInter",
+        "I2": "eth0"
+    },
+    {
+        "H1": "RouteurFAIInter",
+        "I1": "eth1",
+        "H2": "RouteurFAIService",
+        "I2": "eth0"
+    },
+    {
+        "H1": "RouteurFAIService",
+        "I1": "eth1",
+        "H2": "DNS",
+        "I2": "eth0"
+    },
+    {
+        "H1": "RouteurFAIService",
+        "I1": "eth2",
+        "H2": "WEB",
+        "I2": "eth0"
+    },
+    {
+        "H1": "RouteurFAIService",
+        "I1": "eth3",
+        "H2": "FTP",
+        "I2": "eth0"
+    }],
+    "Bridges": [
+    {
+        "Hosts": ["RouteurFAIInter"],
+        "Interfaces": ["eth2"]
+    }]
+}

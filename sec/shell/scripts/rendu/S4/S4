@@ -1,0 +1,62 @@
+#!/bin/bash
+IFS=$'\n'
+multiple_tab () {
+	if [ $1 -gt 0 ]
+	then
+		for i in `seq 1 $1`
+		do
+	        echo -n -e "\t"
+		done
+	fi
+}
+
+lister_dossier () {
+	dir=$1
+	affdir=$2
+	ntab=$3
+	if [ ! -z "$(ls -A $dir)" ]; then
+	    for fichier in `ls -d $dir/*`
+		do
+	        if [[ -d $fichier ]]
+	    	then
+	    		multiple_tab $ntab
+	    		echo -n -e "$fichier\n"
+	    		let ntab++
+	    		lister_dossier $fichier $affdir $ntab 
+	    		let ntab--
+			else
+				if [[ $affdir != 'on' ]]
+				then
+					multiple_tab $ntab
+					echo -n -e "$fichier\n"
+				else
+					echo -n ""
+				fi
+	    	fi
+		done
+	fi
+
+}
+
+
+if [[ $1 = '-d' ]]
+then
+	affdir='on'
+	if [[ $2 != '' ]]
+	then
+		dir=$2
+	else
+		dir='.'
+	fi
+else
+	affdir='off'
+	if [[ $1 != '' ]]
+	then
+		dir=$1
+	else
+		dir='.'
+	fi
+fi
+
+echo $dir
+lister_dossier $dir $affdir 0

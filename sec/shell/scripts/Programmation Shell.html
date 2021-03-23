@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<!-- saved from url=(0078)http://mauran.perso.enseeiht.fr/pages/cours/Systemes_Centralises/TP_Shell.html -->
+<html class=" fmtyqgsnq idc0_329"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Programmation Shell</title>
+  
+</head>
+
+<body class="vsc-initialized">
+<h1 align="center">Programmation Shell</h1>
+<br>
+<span style="font-style: italic;">Ce TP illustre&nbsp; les mécansimes et
+conventions d'appel et de retour de scripts,&nbsp; ainsi que les structures de
+contrôle de base du shell. Les solutions sont développées en Bourne
+shell.</span><br style="font-style: italic;">
+<br style="font-style: italic;">
+
+<ol type="1">
+  <li>Écrire une commande permettant de supprimer tous les fichiers
+    <tt>core</tt> présents dans l'arbre ayant pour racine le catalogue fourni
+    en paramètre ou, par défaut, le catalogue courant.<br>
+    <br>
+    <a href="http://mauran.perso.enseeiht.fr/pages/cours/Corrections/shell2/exo01a">solution utilisant <tt>if</tt></a>, <a href="http://mauran.perso.enseeiht.fr/pages/cours/Corrections/shell2/exo01b">solution utilisant <tt>case</tt></a><br>
+    <br>
+  </li>
+  <li>Écrire une commande qui pose la question « Etes-vous satisfait ? (o/n)
+    » tant que l'usager n'a pas frappé une chaîne de caractères commençant
+    par "o" ou "n".<br>
+    <br>
+    <a href="http://mauran.perso.enseeiht.fr/pages/cours/Corrections/shell2/dac">solution avec test</a>, <a href="http://mauran.perso.enseeiht.fr/pages/cours/Corrections/shell2/dac2">solution avec expr</a><br>
+    <br>
+  </li>
+  <li>Comment un utilisateur peut-il savoir si les fichiers de son répertoire
+    privé racine ont été modifiés, accédés depuis sa précédente
+    déconnexion ?<br>
+    <br>
+  </li>
+  <li>Écrire une commande<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<tt>arbre [-d] [&lt;nom de répertoire&gt;]</tt><br>
+    qui liste de façon indentée tous les fichiers de l'arborescence du
+    répertoire spécifié. Si l'option <tt>-d</tt> est spécifiée, seuls les
+    répertoires sont listés. Si aucun répertoire n'est spécifié, utilise
+    le répertoire courant.<br>
+
+    <p><a href="http://mauran.perso.enseeiht.fr/pages/cours/Corrections/shell2/arbre">solution (récursive, avec
+    fonction)</a></p>
+  </li>
+  <li>Écrire une commande<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<tt>profondeur [&lt;nom de répertoire&gt;]</tt><br>
+    qui calcule la profondeur de l'arbre de répertoires ayant pour racine le
+    répertoire spécifié ou par défaut, le répertoire courant.<br>
+    <br>
+    <span style="font-style: italic;">Solutions</span> : <a href="http://mauran.perso.enseeiht.fr/pages/cours/Corrections/shell2/profc">enchaînement de filtres</a>, <a href="http://mauran.perso.enseeiht.fr/pages/cours/Corrections/shell2/profa">script récursif avec echo</a>, <a href="http://mauran.perso.enseeiht.fr/pages/cours/Corrections/shell2/profb">script récursif avec code de retour</a>,
+    <a href="http://mauran.perso.enseeiht.fr/pages/cours/Corrections/shell2/profd">script récursif avec appel de
+    fonction</a> <br>
+    <br>
+    <span style="font-style: italic;">Variante</span> : écrire une commande
+    <tt>lepluslong [&lt;nom de répertoire&gt;]</tt> qui liste le chemin
+    d'accès le plus long.<br>
+    <a href="http://mauran.perso.enseeiht.fr/pages/cours/Corrections/shell2/profe">solution (récursive, avec fonction)</a>
+    <br>
+    <br>
+  </li>
+  <li>Une commande comportait les options suivantes : <tt>-v -o &lt;nom de
+    fichier&gt; -T &lt;valeur hexa&gt; -S -I -e -t</tt>. Une nouvelle version
+    du logiciel n'accepte plus les options <tt>-T</tt> et <tt>-e</tt>, et
+    l'option <tt>-t</tt> a été rebaptisée <tt>-x</tt>. Ecrire une commande
+     qui prend en paramètre l'ancienne commande, avec ses paramètres, 
+     et exécute la nouvelle commande, avec ses nouveaux paramètres.<br>
+    <a href="http://mauran.perso.enseeiht.fr/pages/cours/Corrections/shell2/elim-param">solution</a><br>
+    <br>
+  </li>
+  <li>Écrire une commande<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<tt>inv &lt;chaîne non vide&gt;</tt><br>
+    qui inverse la chaîne de caractères fournie en paramètre et l'affiche.
+    Si le paramètre est oublié, la commande affiche son mode d'emploi.<br>
+    <br>
+    Exemple :<br>
+    <tt>% inv esope</tt><br>
+    <tt>epose</tt><br>
+    <br>
+    <a href="http://mauran.perso.enseeiht.fr/pages/cours/Corrections/shell2/inverse">solution</a><br>
+    <br>
+  </li>
+  <li>Écrire une commande qui liste, pour tous les répertoires contenus dans
+    le répertoire courant, les informations suivantes : 
+    <ul>
+      <li>nom du propriétaire, </li>
+      <li>nom du répertoire, </li>
+      <li>date de dernière modification. </li>
+    </ul>
+    <br>
+  </li>
+  <li>Écrire une commande<br>
+    &nbsp;&nbsp;&nbsp;&nbsp; <tt>dliste [-d &lt;nom rép.&gt;]
+    </tt><tt>&lt;mois&gt;</tt><tt>+</tt><br>
+    qui liste les fichiers ou répertoires du répertoire spécifié en premier
+    paramètre (ou par défaut le répertoire courant) dont le mois de
+    dernière mise à jour est spécifié dans les paramètres suivants. La
+    commande affiche son mode d'emploi en cas de paramètre erroné.<br>
+    <br>
+    Exemple<br>
+    <tt>% dliste Sep Oct Jan</tt><br>
+    <tt>% dliste -d /bin Feb</tt><br>
+    <br>
+  </li>
+  <li>Écrire une commande<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<tt>tuer &lt;motif&gt;</tt><br>
+    qui tue le processus dont le nom contient le motif donné en paramètre. Si
+    plusieurs processus correspondent au motif fourni, l'ambiguïté est
+    signalée, et la commande n'a pas d'effet.<br>
+    <br>
+    <a href="http://mauran.perso.enseeiht.fr/pages/cours/Corrections/shell2/tuer">solution</a><br>
+    <br>
+  </li>
+  <li>Écrire une commande<br>
+    &nbsp;&nbsp;&nbsp;&nbsp; <tt>compter &lt;fichier&gt; &lt;chaîne&gt;</tt><br>
+    qui compte le nombre d'occurrences du motif donné en second paramètre,
+    dans le fichier fourni en premier paramètre. Remarques : le motif donné
+    en second paramètre ne comporte pas d'espaces ; ce motif peut figurer
+    plusieurs fois dans une même ligne du fichier fourni en premier
+    paramètre.<br>
+    <br>
+  </li>
+  <li>Écrire une commande<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<tt>voyelles &lt;chaîne&gt;</tt><br>
+    qui affiche les voyelles contenues dans la chaîne fournie en paramètre.
+    Si une même voyelle figure plusieurs fois dans la chaîne fournie en
+    paramètre, elle ne sera affichée qu'une fois.<br>
+    <br>
+    <a href="http://mauran.perso.enseeiht.fr/pages/cours/Corrections/shell2/voyelles">solution</a><br>
+    <br>
+  </li>
+  <li>Écrire une commande qui affiche la plus longue ligne lue depuis
+    l'entrée standard.<br>
+    <br>
+    <a href="http://mauran.perso.enseeiht.fr/pages/cours/Corrections/shell2/plus-longue-ligne">solution</a><br>
+    <br>
+  </li>
+  <li>Écrire une commande qui affiche les exécutables qui peuvent être
+    atteints par plusieurs des chemins figurant dans la variable <tt>PATH</tt>.
+    Variantes : afficher les chemins d'accès complets à ces exécutables ;
+    distinguer les fichiers homonymes des fichiers réellement identiques.<br>
+    <br>
+  </li>
+  <li>Écrire une commande<br>
+    &nbsp;&nbsp;&nbsp;&nbsp; <tt>doublons &lt;fichier&gt;</tt><br>
+    qui affiche les lignes du fichier fourni en paramètre qui comportent des
+    mots identiques consécutifs (doublons). Attention, un mot en doublon peut
+    se trouver à cheval sur deux lignes.<br>
+  </li>
+</ol>
+
+
+</body></html>

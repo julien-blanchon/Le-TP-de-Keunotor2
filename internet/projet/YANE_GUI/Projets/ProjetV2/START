@@ -1,0 +1,12 @@
+  cp ./scripts/BoxClient1 ./files/BoxClient1/etc/scripts/init
+  cp ./scripts/RouteurFAIAcces ./files/RouteurFAIAcces/etc/scripts/init
+  cp ./scripts/RouteurFAIInter ./files/RouteurFAIInter/etc/scripts/init
+  cp ./scripts/RouteurFAIService ./files/RouteurFAIService/etc/scripts/init
+  cp ./scripts/DNS ./files/DNS/etc/scripts/init
+  cp ./scripts/WEB ./files/WEB/var/scripts/init
+  cp ./scripts/FTP ./files/FTP/etc/scripts/init
+  echo 'Chargement des VM..'
+  #On lance Yane
+  sudo ./yane > /dev/null
+  exit
+fi

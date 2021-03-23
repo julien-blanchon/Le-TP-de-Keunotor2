@@ -1,0 +1,16 @@
+#!/bin/bash
+command=$1
+shift 1
+new_arg=""
+
+while [ $1 ]
+do
+    case $1 in
+		-e ) shift 1 ;;
+		-T ) shift 2 ;;
+		-t ) new_arg+="-x " && shift 1 ;; 
+		* ) new_arg+="$1 " && shift 1 ;;
+	esac
+done
+
+$command $new_arg
