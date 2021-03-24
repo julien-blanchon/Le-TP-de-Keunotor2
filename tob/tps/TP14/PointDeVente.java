@@ -94,7 +94,19 @@ public class PointDeVente {
 	 * @param date la oate où l'on veut connaître le prix
 	 */
 	public int getPrix(Carburant carburant, LocalDateTime date) {
-		return 0;
+		if (!this.prix.containsKey(carburant)) {
+			return 0;
+		} else {
+			NavigableMap<LocalDateTime, Integer> carburant_date = this.prix.get(carburant);
+			if (carburant_date==null) {
+				return 0;
+			}
+			Map.Entry<LocalDateTime, Integer> prix = carburant_date.floorEntry(date);
+			if (prix==null) {
+				return 0;
+			}
+			return prix.getValue();
+		}
 	}
 
 }

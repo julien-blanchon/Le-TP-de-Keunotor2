@@ -3,7 +3,6 @@ import java.util.*;
 public class Chat extends Observable implements Iterable {
 
 	private List<Message> messages;
-
 	public Chat() {
 		this.messages = new ArrayList<Message>();
 	}
@@ -17,6 +16,10 @@ public class Chat extends Observable implements Iterable {
 	@Override
 	public Iterator<Message> iterator() {
 		return Collections.unmodifiableList(this.messages).iterator();
+	}
+
+	public Message getLast(){
+		return this.messages.get(this.messages.size());
 	}
 
 
