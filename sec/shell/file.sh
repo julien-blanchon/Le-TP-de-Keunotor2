@@ -1,8 +1,8 @@
-for i in 1 2 3
+#!/bin/bash
 
+reponse="n"
+while [[ $reponse = "" || ! $reponse = "o" ]]
 do
-
-  echo $1
-  shift 
-
+    echo "Etes-vous satisfait ? (o/n)";
+    read reponse;
 done
