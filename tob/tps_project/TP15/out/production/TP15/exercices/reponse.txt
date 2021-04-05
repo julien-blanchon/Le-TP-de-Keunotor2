@@ -1,0 +1,34 @@
+Exercice 1:
+1) Y a-t-il sous-typage entre List<String> et ArrayList<String> ? Si oui, dans quel sens ?
+    Oui, ArrayList<E> implement List<E>.
+2) Y a-t-il sous-typage entre ArrayList<Object> et ArrayList<String> ? Si oui, dans quel sens ?
+    Non, car le <E> est différent
+3) Que penser du programme suivant? Est-ce qu’il compile? Que donne l’exécution? Que peut-on en conclure ?
+    Non, il ne compile pas. Car ArrayList<Object> n'étant pas un sous type de ArrayList<String>.
+    Il n'y a donc pas de transtipage possible.
+
+Exercice 2:
+1) Y a-t-il sous-typage entre un tableau d’objets Object[] et un tableau de chaînes String[] ? Si oui, dans quel sens ?
+    Oui car String est un sous-type de Object. Donc String[] sous type de Object[].
+2) Est-ce que le programme suivant compile ? Que donne l’exécution ?
+    Oui le programme compile, cependant il y a une exception java.lang.ArrayStoreException lors de l'exécution
+    lors de l'ajout du Double. Car l'objet deriere ts est toujours un String[] qui ne peut pas admettre de Double.
+
+Exercice 3:
+1) Est-ce que ce programme compile ? Que donne alors son exécution ?
+    Non il ne compile pas car afficher(List<String>) n'existe pas.
+
+Exercice 5:
+1) Quelles sont les contraintes sur la liste ?
+    binarySearch(List<? extends Comparable<? super T>> list, T key)
+    Donc la list doit être composé d'éléments qui sont comparable avec un T
+    (voir un type superieur qui peut donc etre convertis en T)
+    Cepedant la vrais contraintes est que il faut que la liste soit déjà triée.
+2) S’agit-il de programmation défensive ou offensive ?
+    Programmation offensive, car la condition est simplement donné dans la documentation et pas vérifier.
+3) À quoi correspond RandomAccess ?
+    RandomAccess est une interface de marquage qui indique que l'accés au elt peut être fait en complexité O(1).
+3) Expliquer le code de cette méthode binarySearch. Voir le source de la classe Collections.
+    Si on a un RandomAccess alors on fait un indexedBinarySearch sinon un iteratorBinarySearch/
+    indexedBinarySearch --> binarysearch par dicotomie
+

@@ -1,0 +1,89 @@
+module registres(rst, clk, areg[3..0], breg[3..0], dreg[3..0], datain[31..0]:
+						a[31..0], b[31..0], pc[31..0], ir[31..0])
+  decoder4to16(dreg[3..0] : dsel[15..0]) //Multiplexeur qui font la selection !
+  decoder4to16(breg[3..0] : bsel[15..0]) //Multiplexeur qui font la selection !
+  decoder4to16(areg[3..0] : asel[15..0]) //Multiplexeur qui font la selection !
+
+  //r0
+  a[31..0] = "00000000000000000000000000000000" output enabled when asel[0]
+  b[31..0] = "00000000000000000000000000000000" output enabled when bsel[0]
+  
+  //r1
+  a[31..0] = "00000000000000000000000000000001" output enabled when asel[1]
+  b[31..0] = "00000000000000000000000000000001" output enabled when bsel[1]
+
+  //r2
+  reg32_D(rst, clk, dsel[2], datain[31..0] : r2[31..0]) //en si dsel[2] : Copie datain dans r2 ssi dsel[2] !
+  a[31..0] = r2[31..0] output enabled when asel[2]
+  b[31..0] = r2[31..0] output enabled when bsel[2]
+
+  //r3
+  reg32_D(rst, clk, dsel[3], datain[31..0] : r3[31..0])
+  a[31..0] = r3[31..0] output enabled when asel[3]
+  b[31..0] = r3[31..0] output enabled when bsel[3]
+
+  //r4
+  reg32_D(rst, clk, dsel[4], datain[31..0] : r4[31..0])
+  a[31..0] = r4[31..0] output enabled when asel[4]
+  b[31..0] = r4[31..0] output enabled when bsel[4]
+
+  //r5
+  reg32_D(rst, clk, dsel[5], datain[31..0] : r5[31..0])
+  a[31..0] = r5[31..0] output enabled when asel[5]
+  b[31..0] = r5[31..0] output enabled when bsel[5]
+
+  //r6
+  reg32_D(rst, clk, dsel[6], datain[31..0] : r6[31..0])
+  a[31..0] = r6[31..0] output enabled when asel[6]
+  b[31..0] = r6[31..0] output enabled when bsel[6]
+
+  //r7
+  reg32_D(rst, clk, dsel[7], datain[31..0] : r7[31..0])
+  a[31..0] = r7[31..0] output enabled when asel[7]
+  b[31..0] = r7[31..0] output enabled when bsel[7]
+
+  //r8
+  reg32_D(rst, clk, dsel[8], datain[31..0] : r8[31..0])
+  a[31..0] = r8[31..0] output enabled when asel[8]
+  b[31..0] = r8[31..0] output enabled when bsel[8]
+
+  //r9
+  reg32_D(rst, clk, dsel[9], datain[31..0] : r9[31..0])
+  a[31..0] = r9[31..0] output enabled when asel[9]
+  b[31..0] = r9[31..0] output enabled when bsel[9]
+
+  //r10
+  reg32_D(rst, clk, dsel[10], datain[31..0] : r10[31..0])
+  a[31..0] = r10[31..0] output enabled when asel[10]
+  b[31..0] = r10[31..0] output enabled when bsel[10]
+
+  //r11
+  reg32_D(rst, clk, dsel[11], datain[31..0] : r11[31..0])
+  a[31..0] = r11[31..0] output enabled when asel[11]
+  b[31..0] = r11[31..0] output enabled when bsel[11]
+  
+  //r12 : Interdit !
+  reg32_D(rst, clk, dsel[12], datain[31..0] : r12[31..0])
+  a[31..0] = r12[31..0] output enabled when asel[12]
+  b[31..0] = r12[31..0] output enabled when bsel[12]
+
+  //r13 : Interdit !
+  reg32_D(rst, clk, dsel[13], datain[31..0] : r13[31..0])
+  a[31..0] = r13[31..0] output enabled when asel[13]
+  b[31..0] = r13[31..0] output enabled when bsel[13]
+
+  //r14 : PC
+  reg32_D(rst, clk, dsel[14], datain[31..0] : r14[31..0])
+  a[31..0] = r14[31..0] output enabled when asel[14]
+  b[31..0] = r14[31..0] output enabled when bsel[14]
+  pc[31..0] = r14[31..0]
+  
+  //r15 : IR
+  reg32_D(rst, clk, dsel[15], datain[31..0] : r15[31..0])
+  a[31..0] = r15[31..0] output enabled when asel[15]
+  b[31..0] = r15[31..0] output enabled when bsel[15]
+  ir[31..0] = r15[31..0]
+  
+  
+
+end module

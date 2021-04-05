@@ -1,0 +1,2 @@
+
+vmsh1.sh: line 63: ms: command not found

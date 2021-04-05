@@ -1,0 +1,82 @@
+module sequenceur(rst, clk, ir[31..0], N, Z, V, C : fetch, decode, pcplus1, areg[3..0], breg[3..0], dreg[3..0], ualcmd[3..0], dbusin[1..0], write, setflags)
+	// Graphe d'état
+   pcplus1ordecode2fetch = pcplus1 + decode*brind*branch_ok + decode*brind*/branch_ok
+   fetch := pcplus1ordecode2fetch on clk set when rst
+   decode := fetch on clk reset when rst
+   ualind = /ir[31] // 0****
+   setflags = decode*ualind //Setflags indique que l'on va volontairement 
+   // dans l'ual donc qu'il faut modifier NZVC
+   setind = ir[31]*ir[30]*/ir[29]*/ir[28] // 1100 ****(rd) .............(mot24) <---> IR[24..0]: .............(mot24)
+   ldstind = ir[31]*/ir[30]*/ir[29]
+   ldind = ir[31]*/ir[30]*/ir[29]*/ir[28]
+   stind = ir[31]*/ir[30]*/ir[29]*ir[28]
+   brind = ir[31]*ir[30]*ir[29]*/ir[28]
+   branch(ir[27..24], N, Z, V, C : branch_ok)
+   decode2address = decode*ldstind
+   address := decode2address on clk reset when rst
+   decodeoraddress2pcplus1 = decode*ualind + decode*setind + address*ldind + address*stind
+   pcplus1 := decodeoraddress2pcplus1 on clk reset when rst
+   
+   trash[31..0] = ir[31..0]
+   
+   // Instruction
+   areg[3..0] = 	fetch*"1110" +
+   					decode*ualind*ir[23..20] +
+                  decode*setind*"1111" + //PC
+                  decode*ldstind*ir[23..20] +
+                  decode*brind*branch_ok*"1110" +
+                  decode*brind*/branch_ok*"1110" +
+                  address*ldind*"1100" + //r12
+                  address*stind*"1100" +
+                  pcplus1*"1110"
+
+	breg[3..0] = 	fetch*"0000" +
+   					decode*ualind*ir[19..16] +
+                  decode*setind*"0000" + //b pas utilise
+                  decode*ldstind*ir[19..16] +
+                  decode*brind*branch_ok*"1111" +
+                  decode*brind*/branch_ok*"0001" +
+                  address*ldind*"0000" +
+                  address*stind*ir[27..24] +
+                  pcplus1*"0001"
+	
+   dreg[3..0] = 	fetch*"1111" +
+   					decode*ualind*ir[27..24] +
+                  decode*setind*ir[27..24] + 
+                  decode*ldstind*"1100" +
+                  decode*brind*branch_ok*"1110" +
+                  decode*brind*/branch_ok*"1110" +
+                  address*ldind*ir[27..24] +
+                  address*stind*"0000" +
+                  pcplus1*"1110"
+	
+   ualcmd[3..0] =	decode*ualind*ir[31..28] +
+                  decode*setind*"1100" + // 1100 Extend
+                  decode*ldstind*"0000" + // 0000 Somme
+                  decode*brind*branch_ok*"0000" +
+                  decode*brind*/branch_ok*"0000" +
+                  pcplus1*"0000"
+	
+	dbusin[1..0] = fetch*"10" +
+   					decode*ualind*"01" +
+                  decode*setind*"01" +
+                  decode*ldstind*"01" +
+                  decode*brind*branch_ok*"01" +
+                  decode*brind*/branch_ok*"01" +
+                  address*ldind*"10" +
+                  address*stind*"11" +
+                  pcplus1*"01"
+	
+   write = 			fetch*"0" +
+   					decode*ualind*"0" +
+                  decode*setind*"0" +
+                  decode*ldstind*"0" +
+                  decode*brind*branch_ok*"0" +
+                  decode*brind*/branch_ok*"0" +
+                  address*ldind*"0" +
+                  address*stind*"1" +
+                  pcplus1*"0"
+                  
+   trash = N*Z*V*C*setflags
+   
+end module
