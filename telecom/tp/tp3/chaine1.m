@@ -9,9 +9,8 @@ m = 1; %1 bit par symbole pour le mapping. log2(M)
 Rs = Rb/m; % Debit des symboles
 Ts = 1/Rs; % Tenps d'un symbole
 
-
 %% Information binaire a transmettre
-N = 10000; %Nombre de bit a transmettre
+N = 5000; %Nombre de bit a transmettre
 bits = randi([0, 1], 1, N); %Signal aleatoire de N bits.
 
 %% Mapping: Symbole binaire de moyenne nulle ak={-1, 1}
@@ -39,7 +38,8 @@ for i=1:length(EbN0)
     E = 10^(EbN0(i)/10);
     sigma2 = Px*Ns/(2*log2(M)*E);
     bruit = sqrt(sigma2)*randn(1, Nt);
-    x1b = x1 + bruit;
+    bruit = 0; %Sans bruit
+    %x1b = x1 + bruit;
     x1c = x1b; %Reponse impulsionnelle de type dirac
 
     %% Filtre reception
@@ -61,20 +61,22 @@ end
 
 %% Graph
 % Diagramme de l'oeil pour diffeerentes valeurs de Eb/N0.
-fig = figure();
+% fig = figure();
 % for i=1:4
 %     j = i*floor(length(EbN0)/4)
 %     subplot(2, 2, i);
 %     plot( reshape(X(j, :), [Ns, N]) );
 %     EN = EbN0(j);
 %     title(sprintf("Diagramme de l'oeil pour E_b/N_0 = %f dB", EN));
+%     %title(sprintf("Diagramme de l'oeil sans bruit"));
 % end
-%saveas(fig, "figures/Chaine1OeilEbN0.png");
-% TEB=f(Eb/N0)
+% saveas(fig, "figures/Chaine1OeilEbN0.png");
+% %saveas(fig, "figures/Chaine1OeilSansBruit.png");
+
+%TEB=f(Eb/N0)
 fig = figure();
 scatter(EbN0, T, 'b+');
 hold on
-%plot(linspace(EbN0(1), EbN0(end), 1000), qfunc(sqrt(2*linspace(EbN0(1), EbN0(end), 1000))));
 plot(EbN0, qfunc(sqrt(10.^(EbN0/10))));
 set(gca,'yscale','log');
 hold off

@@ -1,9 +1,9 @@
 ---
 # pandoc -s rapport.md -o rapport.pdf --template eisvogel --listings
-title: "Rapport - TP2 : Étude de l’interférence entre symbole et du critère de Nyquist"
+title: "Rapport - TP3 : Etude de l’impact du bruit dans la chaine de transmission"
 subtitle: "Première année - Département Sciences du Numérique"
 author: "[Julien Blanchon](mailto:julien.blanchon@etu.toulouse-inp.fr)"
-date: "20 Mars 2020"
+date: "25 Avril 2020"
 keywords: [telecom, matlab, signal]
 lang: "fr-FR"
 titlepage: true,
@@ -38,113 +38,116 @@ toc-own-page : true
 toc-title: Table des matières
 toc_depth: 2
 lot: false
-lof: false
+lof: true
 
 documentclass: article
 ...	
 
-# Étude sans canal de propagation : bloc modulateur/démodulateur
+# Chaine de référence
 
-1. Expliquez comment sont obtenus les instants optimaux d’échantillonnage (permettant d’échantillonner
-sans interférences entre symboles) :
+1. Donnez le TEB théorique de la chaine implantée, en expliquant pourquoi vous utilisez l’expression fournie (quelles sont les caractéristiques de la chaine qui font que cette expression est la bonne) :
 
-- A partir du tracé de g:
+Le $TEB$ théorique est $Q \left( \sqrt{\frac{2 E_{b}}{N_{0}}} \right)$ car la chaine de référence est:
 
-![Réponse impulsionnelle globale de la chaine 1 de transmission en symbole ($/T_{s}$): $g$\label{rep_g1}](figures/Chaine1_g.png)
+- avec un *filtre mise en forme* et de *réception*, *rectangulaires* de dureé Ts et de hauteur 1
+- avec *mapping binaire* à *moyenne nulle* et de symbole *independants* et *équiprobables*
+- avec un *bruit blanc* et *gaussien*, de DSP $\frac{N_0}{2}$
 
-Pour ne obtenir les instants optimaux d'échantillonage symbole $n_{0}$ il faut échantilloner pour une valeur de $t_0$ ou plutôt de $n_0$
-qui ferrais que la réponse centré et normalisé $g^{(t_{0})}$ respecterais le critaire de Nyquist en fréquentielle:
-$$\left\{\begin{array}{l}
-g\left(t_{0}\right) \neq 0 \\
-g\left(t_{0}+p T_{s}\right)=0 \text { for } p \in \mathbb{Z}^{*}
-\end{array}\right.$$
-Ainsi on prend l'instant maximal de la chaque réponse impulsionnelle (instant sur lequelle on voudrais centrée $g$).
-Modulo $N_{s}=8$ on trouve:
-
-Filtre     Bande($-30d_B$)
----------  ----------
-*filtre 1*    $2$
-*filtre 2*    $1$
----------  ----------
+Donc respecte Nyquist, $TEB=Q\left(\frac{g\left(t_{0}\right)}{\sigma_{w}}\right)=Q\left(\frac{T_S}{\sigma_{w}}\right)$ et $\sigma_{\omega} = \frac{N_0 Ts}{2}$ ainsi $TEB = Q \left( \sqrt{\frac{2 E_{b}}{N_{0}}} \right)$
 
 
-- A partir du tracé du diagramme de l’oeil en sortie du filtre de réception:
+2. Donnez les tracés superposés sur une même figure du TEB simulé et du TEB théorique afin de valider le bon fonctionnement de votre chaine de référence.
 
-![Diagramme de l'oeil de la Chaine 1\label{diag_oeil1}](figures/Chaine1_Oeil.png)
-Pour ne obtenir les instants optimaux d'échantillonage symbole $n_{0}$ il faut échantilloner lorsque l'interférence entre symboles est nulle
-ou presque nulle pour ainsi respecter le critaire de Nyquist en temporelle:
-$$\left\{\begin{array}{l}
-\sum_{k} G^{\left(t_{0}\right)}\left(f-\frac{k}{T_{s}}\right)=cte \\
-G^{t_{0}}(f)=\operatorname{TF}\left[\frac{g\left(t+t_{0}\right)}{g\left(t_{0}\right)}\right]
-\end{array}\right.$$
+![Tracé en log du TEB simulé et théorique de la chaine de référence](figures/ChaineRefTEBEbN0.png)
 
-Pour cela on peu tracer le diagramme de l'oeil du signal en sortie du filtre de réceptions. C'est a dire dire superposé
-des tranches de taille *N_{s}* du signal. Ainsi les instants optimaux sont obtenus lorsque toutes les tranches passe par seulement $n$
-points avec $n$ le nombre de symboles.
-Sur la figure \ref{diag_oeil1} on peut voir que les instants optimaux sont:
+# Première chaine à étudier, implanter et comparer à la chaine de référence
 
-Filtre     Bande($-30d_B$)
----------  ----------
-*filtre 1*    $2$
-*filtre 2*    $1$
----------  ----------
+## Implantation de la chaine sans bruit
 
-2. Expliquez pourquoi le le taux d’erreur binaire de la transmission n’est plus nul lorqu’on échantillonne à $n0$ + mNs, avec $n0$ = 3.
+1. Utilisez le tracé du diagramme de l’oeil en sortie du filtre de réception sur la durée $T$ ($N$ échantillons) pour proposer des instants d’échantilllonnage $t_0 + m T_s$, en expliquant votre choix.
 
-Il a alors des interférence entre symboles ainsi $z(t_0 + mT_s) ≠ a_mg(t_0)$ donc il est beaucoup plus probable de faire des erreur.
+![Diagramme de l'oeil en sortie du filtre de réception de la chaine 1](figures/Chaine1OeilSansBruit.png)
 
-# Étude avec canal de propagation sans bruit
+L'instant optimal d'echantillonage est donc $2$ pour ne pas avoir d'interférence entre symboles.
 
-Le crit`ere de Nyquist peut-il être vérifié sur cette chaine de transmission :
+2. Proposez le seuil optimal à utiliser ici pour la décision en expliquant votre choix.
 
-- Pour BW = 4000 Hz ?
+Le seuil optimal avec comme mapping $a_k \in \left\{ -1, 1 \right\}$ est logiquement $0 = \frac{(+g(t_0)) + (-g(t_0))}{2}$ car on aura $z_m = a_m g(t_0)$, et donc logiquement localisée en $-g(t_0)$ et $+g(t_0)$.
 
-- Pour BW = 1000 Hz ?
+![Distribution de $z_m$](figures/chaine1_distribution.png)
 
-1. Expliquez votre réponse (oui ou non) en utilisant le tracé, sur la même figure, de |H(f)Hr(f)| et de
-|Hc(f)|, où H(f) est la réponse en fréquence du filtre de mise en forme, Hr(f) la réponse en fréquence
-du filtre de réception et Hc(f) la réponse en fréquence du filtre canal.
 
-2. Expliquez votre réponse (oui ou non) en utilisant le tracé le diagramme de l’oeil à la sortie du filtre de
-réception.
+## Implantation de la chaine avec bruit
 
-## BW = 4000 Hz
-$H \times Hr$ seul satisfait le critere de Nyquiste.
+1. Donnez les tracés superposés sur une même figure du TEB simulé et du TEB théorique afin de valider le bon fonctionnement de votre chaine.
 
-![$H1$ pour $BW=4000Hz$](figures/Chaine2_H1_4000.000000.png)
-![$H2$ pour $BW=4000Hz$](figures/Chaine2_H2_4000.000000.png)
-![$log_{10}(H1)$ pour $BW=4000Hz$](figures/Chaine2_logH1_4000.000000.png)
-![$log_{10}(H2)$ pour $BW=4000Hz$](figures/Chaine2_logH2_4000.000000.png)
+![Tracé en log du TEB simulé et théorique de la chaine de 1](figures/Chaine1TEBEbN0.png)
 
-- Réponse en fréquence:
+2. Comparez la chaine de transmission implantée ici à la chaine de transmission de référence en termes d’efficacité en puissance. La chaine éventuellement la plus efficace en puissance devra être identifiée, en expliquant ce qui la rend plus efficace si c’est le cas (vous vous appuierez, pour cela, sur les tracés réalisés durant les TPs et les études réalisées en cours et TD).
 
-Pour le **Canal1**: Le support du canal $|Hc|$ c'est trop petit on ne récupere
-pas totalement $H \times Hr$. Ne sattisfait pas Nyquiste.
-Pour le **Canal2**: Le support du canal $|Hc|$ est suffisamenent grand pour
-récupérer entierement $H \times Hr$. Satisfait pas Nyquiste.
+![Tracé en log du TEB simulé et théorique de la chaine de 1 et la chaine de référence](figures/ComparaisonChaineRefEt1TEB.png)
 
-- Diagramme de l'oeil:
-Pour le **Canal1**: Ne satisfait pas Nyquist (aucun $n0$ valide) : le mieux est
-entre 2 et 3.
-Pour le **Canal2**: Satisfait presque Nyquist avec entre 1 et 2
+*Efficacité en puissance de la transmission* : SNR(Eb/N0) par bit nécessaire à l’entrée du récepteur pour atteindre le TEB souhaité
 
-## BW = 1000 Hz
-$H \times Hr$ seul satisfait le critere de Nyquiste.
+La chaine de référence est plus efficasse car pour la chaine 1 le critere de filtrage adapté n’est pas respecté ainsi le SNR aux instants de décision n’est donc pas maximisé et logiquement le TEB pour un $\frac{E_b}{N_0}$ est grand. Ainsi pour atteindre un TEB donnée il faut une plus grand $\frac{E_b}{N_0}$ avec la chaine 1 que la chaine de référence donc l'efficacité spectral de la chaine de référrence est plus performante.
+En l'occurence les deux chaines correspondent aux exercice 1 et 2 du TD3.
 
-![$H1$ pour $BW=1000Hz$](figures/Chaine2_H1_1000.000000.png)
-![$H2$ pour $BW=1000Hz$](figures/Chaine2_H2_1000.000000.png)
-![$log_{10}(H1)$ pour $BW=1000Hz$](figures/Chaine2_logH1_1000.000000.png)
-![$log_{10}(H2)$ pour $BW=1000Hz$](figures/Chaine2_logH2_1000.000000.png)
+3. Comparez la chaine de transmission implantée ici à la chaine de transmission de référence en termes d’efficacité spectrale. La chaine éventuellement la plus efficace spectralement devra être identifiée, en expliquant ce qui la rend plus efficace si c’est le cas (vous vous appuierez, pour cela, sur les tracés réalisés durant les TPs et les études réalisées en cours et TD).
 
-- Réponse en fréquence:
+*Efficacité spectrale de la transmission* : Bande B nécessaire pour passer le débit Rb souhaité 
 
-Pour le Canal1: Le support du canal $|Hc|$ c'est BEAUCOUP trop petit on ne récupere
-pas totalement $H \times Hr$. Ne satisfait pas Nyquiste.
-Pour le Canal2: Le support du canal $|Hc|$ c'est trop petit on ne récupere
-pas totalement $H \times Hr$. Ne satisfait pas Nyquiste.
+L'efficacité spectrale dépend de $\frac{log_{2}(M)}{k}$ avec $M$ l'ordre de modulation et $k$ est fonction du filtre de mise en forme. Ainsi la chaine de référence et la chaine 1 ont la même efficacité spectrale car elles ont le même $M$ et le même filtre de mise en forme.
 
-- Diagramme de l'oeil:
+# Deuxième chaine à étudier, implanter et comparer à la chaine de référence
 
-Pour le Canal1: Ne satisfait pas Nyquist (aucun $n0$ valide).
+## Implantation de la chaine sans bruit
 
-Pour le Canal2: Ne satisfait pas Nyquist (aucun $n0$ valide).
+1. Utilisez le tracé du diagramme de l’oeil en sortie du filtre de réception sur la durée $T$ ($N$ échantillons) pour proposer des instants d’échantilllonnage $t_0 + m T_s$, en expliquant votre choix.
+
+![Diagramme de l'oeil en sortie du filtre de réception de la chaine 2](figures/Chaine2OeilSansBruit.png)
+
+L'instant optimal d'echantillonage est donc $8$ pour ne pas avoir d'interférence entre symboles.
+
+2. Proposez les seuils optimaux à utiliser ici pour la décision en expliquant votre choix.
+
+Les seuils optimaux sont $-16$, $0$ et $+16$ (qui sépare donc $\mathbb{R}$ en $4$).
+
+Car on aura $z_m = a_m g(t_0)$, et donc logiquement localisée en $-3g(t_0)$, $-g(t_0)$, $g(t_0)$, $3g(t_0)$.
+
+Avec $g(t_0) = g(8) = 8$ avec $g = conv(h1, hr1)$. Ainsi le point médiant entre $\pm 24$ et $\pm 8$ est $\pm 16$ et entre $-8$ et $+8$, $0$.
+
+![Diagramme de z_m](figures/Chaine2Hist.png)
+
+## Implantation de la chaine avec bruit
+
+1. Donnez les tracés superposés sur une même figure du TES simulé et du TES théorique donné dans l'énoncé : $T E S=\frac{3}{2} Q\left(\sqrt{\frac{4}{5} \frac{E_{b}}{N_{0}}}\right) .$ La similitude ou différence obtenue entre le TES simulé et le TES théorique donné devra être expliquée.
+
+![Tracé en log du TES simulé et théorique de la chaine de 2](figures/Chaine2TESEbN0.png)
+
+Les deux courbes correspondent bien cependant pour cela on à du prendre un nombre de bit ($N$) élevé pour rendre l'erreur $\epsilon^{2}=\frac{\sigma_{T E B}^{2}}{m_{T E B}^{2}}=\frac{1-p}{N p} \simeq \frac{1}{N p}$ plus faible.
+
+2. Donnez les tracés superposés sur une même figure du TEB obtenu par simulation sur la chaine implantée et du TEB théorique suivant :
+$$
+T E B=\frac{3}{4} Q\left(\sqrt{\frac{4}{5} \frac{E_{b}}{N_{0}}}\right)
+$$
+La similitude ou différence obtenue devra être expliquée. La chaine éventuellement la plus efficace en puissance devra être identifiée, en expliquant ce qui la rend plus efficace si c'est le cas.
+
+![Tracé en log du TEB simulé et théorique de la chaine de 2](figures/Chaine2TEBEbN0.png)
+
+Étrangement les deux courbes ne correspondaient absolument pas, cependant j'ai remarqué que le problème venait du coéfficient $\frac{3}{4}$.
+
+Cela est surement du au fait que le chaine 2 ne respecte pas le *mapping de gray*, ainsi le calcul théorique avec le coéfficient $\frac{3}{4}$ n'est plus valide.
+
+3. Comparez la chaine de transmission simulée ici à la chaine de référence en termes d’efficacité en puissance en expliquant votre réponse (vous vous appuierez, pour cela, sur les tracés réalisés durant les TPs et les études réalisées en cours et TD).
+
+La chaine de référence est plus efficasse car pour la chaine 2 le critere de filtrage adapté n’est pas respecté ainsi le SNR aux instants de décision n’est donc pas maximisé et logiquement le TEB pour un $\frac{E_b}{N_0}$ est grand. Ainsi pour atteindre un TEB donnée il faut une plus grand $\frac{E_b}{N_0}$ avec la chaine 2 que la chaine de référence donc l'efficacité spectral de la chaine de référrence est plus performante
+
+Cela se retrouve comme pour la chaine 1 sur le graph $TEB = f(\frac{E_b}{N_0})$ :
+
+![Tracé en log du TEB simulé et théorique de la chaine de 2 et la chaine de référence](figures/ComparaisonChaineRefEt2TEB.png)
+
+4. Comparez la chaine de transmission simulée ici à la chaine de référence en termes d’efficacité spectrale en expliquant votre réponse (vous vous appuierez, pour cela, sur les tracés réalisés durant les TPs et les études réalisées en cours et TD).
+
+*Efficacité spectrale de la transmission* : Bande B nécessaire pour passer le débit Rb souhaité 
+
+L'efficacité spectrale dépend de $\frac{log_{2}(M)}{k}$ avec $M$ l'ordre de modulation et $k$ est fonction du filtre de mise en forme. La chaine de référence et la chaine 2 ont le même filtre de mise en forme donc le même $k$. Cependant les ordres sont différents, $M=4$ pour la chaine 2 et $M=2$ pour la chaine de référence. Donc la chaine 2 est plus efficace spectralement.

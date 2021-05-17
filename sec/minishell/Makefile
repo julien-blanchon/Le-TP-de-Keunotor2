@@ -3,11 +3,11 @@ CC = gcc
 	
 # Spécifier les options du compilateur
 CFLAGS = -Wall -Wextra
-EXEC = minishell
+EXEC = superminishell
 
 all: $(EXEC)
 
-minishell: minishell.c readcmd.o 
+superminishell: superminishell.c readcmd.o 
 	$(CC) $(CFLAGS) $^ -o $@
 
 readcmd: readcmd.c readcmd.h

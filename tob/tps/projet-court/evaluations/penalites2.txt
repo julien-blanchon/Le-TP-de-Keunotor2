@@ -1,0 +1,97 @@
+Date de l'évaluation : mer. 07 avril 2021 14:25:17 CEST
+
+Nombre de similitudes (voir evaluations/penalites2/sim_java.txt) : 5
+Les similitudes indiquent généralement du code à restructurer.
+
+Erreurs checkstyle (différentes/types) : 0/0	(voir evaluations/penalites2//checkstyle.log)
+
+Classe OperationInterditeException : OperationInterditeException (ok)
+
+Procuration sur le jeu réel : allumettes/JeuProcuration.java (ok)
+
+OperationInterditeException, levée dans : allumettes/JeuProcuration.java (ok)
+OperationInterditeException, récupérée dans : allumettes/Arbitre.java (ok)
+
+Throwable, Exception et RuntimeException ne devraient pas être récupérées car trop générales... ok
+
+AssertionError ne doit pas être récupérée... ok
+
+Autres exceptions récupérées :
+  | allumettes/Arbitre.java:46:            } catch (AbandonException e) {
+  | allumettes/Arbitre.java:109:            } catch (CoupInvalideException e) {
+  | allumettes/Humain.java:96:        } catch (NumberFormatException e) {
+  | allumettes/Jouer.java:69:       } catch (ConfigurationException e) {
+
+Utilisation de 'Scanner' : ok
+  | allumettes/Humain.java:15:    /**Scanner communs à l'ensemble des stratégie Humaine.*/
+  | allumettes/Humain.java:16:    private static final Scanner SCANNER = new Scanner(System.in);
+  | allumettes/Humain.java:61:     * @see Scanner
+
+Utilisation de 'split' : ok
+  | allumettes/Jouer.java:33:                   String[] parts = arg.split("@");
+
+Utilisation de 'Random' : ok
+  | allumettes/Naif.java:23:     * @see java.util.Random
+  | allumettes/Naif.java:30:        java.util.Random random = new java.util.Random();
+
+Utilisation de '3' : ok
+
+Affichage de 'Impossible !' : ok
+
+Utilisation de 'System.exit' : ok
+
+Compilation de Jouer.java : OK.
+Compilation de Arbitre.java : OK.
+Compilation de HumainTest.java : OK.
+Compilation de JoueurTest.java : OK.
+Compilation de TricheurTest.java : OK.
+Compilation de Lente.java : OK.
+Compilation de NaifTest.java : OK.
+Compilation de ExpertTest.java : OK.
+Compilation de RapideTest.java : OK.
+Compilation de JeuReelTest.java : OK.
+Compilation de JeuProcurationTest.java : OK.
+Test exemplePresqueSujet : ok
+Test exempleTricheurSujet : ok
+Test exempleConfiantTricheurSujet : ok
+Test exempleRobustesse : ok
+Test exempleHumainTricheurExpert : ok
+Test exempleLucLea : ok
+Test exempleRapideRapide : ok
+Test exempleTricheurExpert : ok
+Test exempleExpertTest : ok
+Test exempleExpertTest2 : ok
+Test exempleExpertTest3 : ok
+Test exempleExpertTest4 : ok
+Test exempleRapideTest : ok
+Test exempleRapideTest1 : ok
+Test exempleRapideTest2 : ok
+Test exempleRapideTest3 : ok
+
+Test RobustesseTest : OK (25 tests)	(voir evaluations/penalites2/RobustesseTest.log)
+
+On recommence avec les classes/interfaces fournies : Jeu ConfigurationException CoupInvalideException
+Compilation de Jouer.java : OK.
+Compilation de Arbitre.java : OK.
+
+Vérification du respect du diagramme de classe...
+Test FormeTest : OK (2 tests)	(voir evaluations/penalites2/FormeTest.log)
+
+Compilation de HumainTest.java : OK.
+Test allumettes.HumainTest : OK (2 tests)	(voir evaluations/penalites2/allumettes.HumainTest.log)
+Compilation de JoueurTest.java : OK.
+Test allumettes.JoueurTest : OK (4 tests)	(voir evaluations/penalites2/allumettes.JoueurTest.log)
+Compilation de TricheurTest.java : OK.
+Test allumettes.TricheurTest : OK (2 tests)	(voir evaluations/penalites2/allumettes.TricheurTest.log)
+Compilation de NaifTest.java : OK.
+Test allumettes.NaifTest : OK (3 tests)	(voir evaluations/penalites2/allumettes.NaifTest.log)
+Compilation de ExpertTest.java : OK.
+Test allumettes.ExpertTest : OK (3 tests)	(voir evaluations/penalites2/allumettes.ExpertTest.log)
+Compilation de RapideTest.java : OK.
+Test allumettes.RapideTest : OK (4 tests)	(voir evaluations/penalites2/allumettes.RapideTest.log)
+Compilation de JeuReelTest.java : OK.
+Test allumettes.JeuReelTest : OK (7 tests)	(voir evaluations/penalites2/allumettes.JeuReelTest.log)
+Compilation de JeuProcurationTest.java : OK.
+Test allumettes.JeuProcurationTest : OK (5 tests)	(voir evaluations/penalites2/allumettes.JeuProcurationTest.log)
+
+Total pénalités : 0

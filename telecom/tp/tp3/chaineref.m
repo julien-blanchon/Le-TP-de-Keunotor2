@@ -73,7 +73,6 @@ end
 fig = figure();
 scatter(EbN0, T, 'b+');
 hold on
-%plot(linspace(EbN0(1), EbN0(end), 1000), qfunc(sqrt(2*linspace(EbN0(1), EbN0(end), 1000))));
 plot(EbN0, qfunc(sqrt(2*10.^(EbN0/10))));
 set(gca,'yscale','log');
 hold off
@@ -82,4 +81,4 @@ title(sprintf("Taux erreur binaire TEB = f(E_b/N_0) en dB"));
 xlabel("E_b/N_0 en dB");
 ylabel("TEB");
 
-%saveas(fig, "figures/ChaineRefTEBEbN0.png");
+saveas(fig, "figures/ChaineRefTEBEbN0.png");
