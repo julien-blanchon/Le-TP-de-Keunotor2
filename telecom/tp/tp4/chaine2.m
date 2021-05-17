@@ -30,11 +30,11 @@ symbole(find(symbole==2)) = dk(3); % 10->-1+i
 symbole(find(symbole==3)) = dk(4); % 11->-1-i
 Nsymbole = N/m;
 
-% Constellation
-fig1 = figure(1);
-scatter(real(symbole), -imag(symbole));
-title(sprintf("Constellation mapping"));
-%saveas(fig1, sprintf("figures/Chaine2_Constellation_Mapping.png"));
+% % Constellation
+% fig1 = figure(1);
+% scatter(real(symbole), -imag(symbole));
+% title(sprintf("Constellation mapping"));
+% %saveas(fig1, sprintf("figures/Chaine2_Constellation_Mapping.png"));
 
 %% Surechantillonnage
 Rs = Rb/m; % Debit des symboles
@@ -55,15 +55,16 @@ Nsymbole_bandebase = Nsymbole_sur;
 fp = 2000; %fp = 2kHz frequence porteuse
 symbole_fp = symbole_bandebase.*exp(2*j*pi*fp*Te*(0:Nsymbole_bandebase-1));
 x = real(symbole_fp);
+Nx = Nsymbole_bandebase;
 
 %%Boucle EbN0
 Px = mean(abs(x).^2);
-EbN0m = 1:2; %en Db
+EbN0m = 1:0.25:8; %en Db
 %% Filtre canal
 for EbN0 = EbN0m
     E = 10^(EbN0/10); %Eb/N0 en 10^
     sigma2 = Px*Ns/(2*log2(M)*E);
-    n = sqrt(sigma2)*randn(1, Nt);
+    n = sqrt(sigma2)*randn(1, Nx);
     % n = 0; %Sans bruit
     signal_transmis = x + n;
 
@@ -82,17 +83,18 @@ for EbN0 = EbN0m
     signal_filtre_sin = signal_sin;
     signal_filtre_cos = signal_cos;
 
-    % Diagramme de l'oeil pour différentes valeurs de Eb/N0.
-    fig2 = figure(2);
-    plot( reshape(signal_filtre_cos, [Ns, N/2]) );
-    title(sprintf("Diagramme de l'oeil sans bruit du signal cos pour Eb/N_0 = %.2f", EbN0));
-    %saveas(fig2, sprintf("figures/Chaine1OeilSansBruitSin_%.2f.png", EbN0));
-    fig3 = figure(3);
-    plot( reshape(signal_filtre_sin, [Ns, N/2]) );
-    title(sprintf("Diagramme de l'oeil sans bruit du signal sin pour Eb/N_0 = %.2f", EbN0));
-    %saveas(fig3, sprintf("figures/Chaine1OeilSansBruitSin_%.2f.png", EbN0));
+%     % Diagramme de l'oeil pour différentes valeurs de Eb/N0.
+%     fig2 = figure(2);
+%     plot( reshape(signal_filtre_cos, [Ns, N/2]) );
+%     title(sprintf("Diagramme de l'oeil sans bruit du signal cos pour Eb/N_0 = %.2f", EbN0));
+%     %saveas(fig2, sprintf("figures/Chaine1OeilSansBruitSin_%.2f.png", EbN0));
+%     fig3 = figure(3);
+%     plot( reshape(signal_filtre_sin, [Ns, N/2]) );
+%     title(sprintf("Diagramme de l'oeil sans bruit du signal sin pour Eb/N_0 = %.2f", EbN0));
+%     %saveas(fig3, sprintf("figures/Chaine1OeilSansBruitSin_%.2f.png", EbN0));
     
     signal_bande_base = signal_filtre_cos + j*signal_filtre_sin;
+    
     %% Filtre de reception
     hr = h;
     signal_reception = filter_nodelay(hr, 1, signal_bande_base);
@@ -100,18 +102,18 @@ for EbN0 = EbN0m
     %% Echantillonage
     n0 = 1;
     signal_bande_echantilloner = signal_reception(n0:Ns:end);
-    % Constellation
-    fig4 = figure(4);
-    scatter(real(signal_bande_echantilloner), -imag(signal_bande_echantilloner));
-    title(sprintf("Constellation echantillonneur pour Eb/N_0 = %.2f", EbN0));
-    %saveas(fig4, sprintf("figures/Chaine2_Constellation_%.2f.png", EbN0));
+%     % Constellation
+%     fig4 = figure(4);
+%     scatter(real(signal_bande_echantilloner), -imag(signal_bande_echantilloner));
+%     title(sprintf("Constellation echantillonneur pour Eb/N_0 = %.2f", EbN0));
+%     %saveas(fig4, sprintf("figures/Chaine2_Constellation_%.2f.png", EbN0));
     
     %% Décision
-    % Histogramme
-    fig5 = figure(5)
-    hist(angle(signal_bande_echantilloner), 100);
-    title(sprintf("Histogramme de arg(z_m) pour Eb/N_0 = %.2f", EbN0));
-    %saveas(fig5, sprintf("figures/Chaine2Hist%.2f.png", EbN0));
+%     % Histogramme
+%     fig5 = figure(5)
+%     hist(angle(signal_bande_echantilloner), 100);
+%     title(sprintf("Histogramme de arg(z_m) pour Eb/N_0 = %.2f", EbN0));
+%     %saveas(fig5, sprintf("figures/Chaine2Hist%.2f.png", EbN0));
     
     % 4 angle qui code chaque symbole.
     % Plutôt que de faire avec les angles, on peut directement utiliser
@@ -135,6 +137,8 @@ for EbN0 = EbN0m
 
 end
 
+plot(EbN0m, qfunc(sqrt(10.^(EbN0m/10))));
+set(gca,'yscale','log');
 %saveas(fig6, sprintf("figures/Chaine2TEB.png"));
 
 
