@@ -66,6 +66,7 @@ for i = 1:Nt_test
             %A finir, plus petite distance !
             j = j+1;
         end
+        Imax = Imaxs(1);
     end
     
     % Assignation de l'étiquette correspondant à la classe trouvée au point 

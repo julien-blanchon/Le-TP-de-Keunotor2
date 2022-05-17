@@ -1,9 +1,9 @@
 clear all
 close all
-%% Chaine de transmission QPSK
+%% Chaine de transmission QPSK : sur porteuse
 
 figure(6);
-title(sprintf("Taux erreur binaire TEB"));
+title(sprintf("Taux erreur binaire TEB QPSK sur porteuse"));
 xlabel("E_b/N_0 en dB");
 ylabel("TEB");
     
@@ -12,7 +12,7 @@ Rb = 2000; % Rb = 2kHz debit binaire
 Fe = 10000; % Fe = 10kHz frequence echantillonage
 Te = 1/Fe;
 %% Information binaire a transmettre
-N = 1000; %Nombre de bit a transmettre
+N = 5000; %Nombre de bit a transmettre
 bits = randi([0, 1], 1, N); %Signal aleatoire de N bits.
 
 %% Mapping de Gray a moyenne nulle: QPSK 4 pts sur le cercle/grille
@@ -51,15 +51,25 @@ h = rcosdesign(alpha, span, Ns);
 symbole_bandebase = filter_nodelay(h, 1, symbole_sur);
 Nsymbole_bandebase = Nsymbole_sur;
 
+%% DSP de l'enveloppe complexe
+fig7 = figure(7);
+title(sprintf("DSP QPSK"));
+pwelch(symbole_bandebase, [],[], [], Fe, 'centered');
+hold on;
+
 %% Transposition en fréquence
 fp = 2000; %fp = 2kHz frequence porteuse
 symbole_fp = symbole_bandebase.*exp(2*j*pi*fp*Te*(0:Nsymbole_bandebase-1));
 x = real(symbole_fp);
 Nx = Nsymbole_bandebase;
+pwelch(x, [],[], [], Fe, 'centered');
+legend('DSP enveloppe complexe','DSP sur porteuse','Location','Best');
+hold off;
+saveas(fig7, "figures/DSP_env_complx.png");
 
 %%Boucle EbN0
 Px = mean(abs(x).^2);
-EbN0m = 1:0.25:8; %en Db
+EbN0m = 1:0.1:8; %en Db
 %% Filtre canal
 for EbN0 = EbN0m
     E = 10^(EbN0/10); %Eb/N0 en 10^
@@ -139,6 +149,6 @@ end
 
 plot(EbN0m, qfunc(sqrt(10.^(EbN0m/10))));
 set(gca,'yscale','log');
-%saveas(fig6, sprintf("figures/Chaine2TEB.png"));
+saveas(fig6, sprintf("figures/Chaine2TEB.png"));
 
 

@@ -13,7 +13,7 @@ Fe = 10000; % Fe = 10kHz frequence echantillonage
 Te = 1/Fe;
 
 %% Information binaire a transmettre
-N = 2*3*4*50; %Nombre de bit a transmettre
+N = 2*3*4*100; %Nombre de bit a transmettre
 bits = randi([0, 1], 1, N); %Signal aleatoire de N bits.
 
 %% Mapping
@@ -68,12 +68,44 @@ h4 = rcosdesign(alpha, span, Ns4);
 x4 = filter_nodelay(h4, 1, symbole_sur4);
 Nx4 = (N/m4)*Ns4;
 
-%%Boucle EbN0
+%% DSP
+fig7 = figure(7);
+title(sprintf("DSP"));
+xlabel("Fréquence en kHz");
+ylabel("Puissance en dB");
+[Px1,Fx1] = periodogram(x1,[], Nx1, 'centered');
+[Px2,Fx2] = periodogram(x2,[], Nx2, 'centered');
+[Px3,Fx3] = periodogram(x3,[], Nx3, 'centered');
+[Px4,Fx4] = periodogram(x4,[], Nx4, 'centered');
+plot(Fx1, 10*log10(Px1)); hold on;
+plot(Fx2, 10*log10(Px2)); hold on;
+plot(Fx3, 10*log10(Px3)); hold on;
+plot(Fx4, 10*log10(Px4)); hold on;
+hold off;
+legend('4-ASK','4-PSK', '8-PSK', '16-QAM', 'Location','Best');
+saveas(fig7, sprintf("figures/ComparaisonDSP.png"));
+
+fig8 = figure(8);
+pwelch(x1, [],[], [], Fe, 'centered');
+saveas(fig8, sprintf("figures/ComparaisonPwelch4ASK.png"));
+fig9 = figure(9);
+pwelch(x2, [],[], [], Fe, 'centered');
+saveas(fig9, sprintf("figures/ComparaisonPwelch4PSK.png"));
+fig10 = figure(10);
+pwelch(x3, [],[], [], Fe, 'centered');
+saveas(fig10, sprintf("figures/ComparaisonPwelch8ASK.png"));
+fig11 = figure(11);
+pwelch(x4, [],[], [], Fe, 'centered');
+saveas(fig11, sprintf("figures/ComparaisonPwelch16QAM.png"));
+
+
+
+%% Boucle EbN0
 Px1 = mean(abs(x1).^2);
 Px2 = mean(abs(x2).^2);
 Px3 = mean(abs(x3).^2);
 Px4 = mean(abs(x4).^2);
-EbN0m = 1:0.1:8; %en Db
+EbN0m = 0:0.1:8; %en Db
 TEB1 = [];
 TEB2 = [];
 TEB3 = [];
@@ -105,7 +137,7 @@ for EbN0 = EbN0m
     signal_bande_echantilloner4 = signal_reception4(n0:Ns4:end);
     
     % Constelation pour différentes valeurs de Eb/N0.
-    if (EbN0 == 1 || EbN0 == 2 || EbN0 == 4 || EbN0 == 8)
+    if (EbN0 == EbN0m(1) || EbN0 == EbN0m(1+fix(length(EbN0m)/3)) || EbN0 == EbN0m(1+fix(length(EbN0m)/2)) || EbN0 == EbN0m(end))
         fig = figure();
         subplot(2,2,1)
         scatter(real(signal_transmis1), imag(signal_transmis1));
@@ -119,7 +151,7 @@ for EbN0 = EbN0m
         subplot(2,2,4)
         scatter(real(signal_transmis4), imag(signal_transmis4));
         title(sprintf("Constellation 16-QAM pour Eb/N_0 = %.2f", EbN0));
-        %saveas(fig, sprintf("figures/Constellation_%.2f.png", EbN0));
+        saveas(fig, sprintf("figures/Constellation_%.2f.png", EbN0));
     end
     
     %% Demapping
@@ -151,7 +183,8 @@ scatter(EbN0m, TEB2);
 scatter(EbN0m, TEB3);
 scatter(EbN0m, TEB4);
 plot(EbN0m, qfunc(sqrt(10.^(EbN0m/10))));
+legend('4-ASK','4-PSK', '8-PSK', '16-QAM', 'Courbe théorique 4-PSK', 'Location','Best');
 set(gca,'yscale','log');
-%saveas(fig6, sprintf("figures/Chaine2TEB.png"));
+saveas(fig6, sprintf("figures/ComparaisonTEB.png"));
 
 

@@ -1,6 +1,6 @@
 clear all
 close all
-%% Chaine de transmission : Passe bas équivalent
+%% Chaine de transmission QPSK : Passe bas équivalent
 
 figure(1);
 title(sprintf("Taux erreur binaire TEB"));
@@ -13,7 +13,7 @@ Fe = 10000; % Fe = 10kHz frequence echantillonage
 Te = 1/Fe;
 
 %% Information binaire a transmettre
-N = 1000; %Nombre de bit a transmettre
+N = 5000; %Nombre de bit a transmettre
 bits = randi([0, 1], 1, N); %Signal aleatoire de N bits.
 
 %% Mapping de Gray a moyenne nulle: QPSK 4 pts sur le cercle/grille
@@ -56,6 +56,12 @@ Nsymbole_bandebase = Nsymbole_sur;
 x = symbole_bandebase;
 Nx = Nsymbole_bandebase;
 
+%% DSP de l'enveloppe complexe
+fig7 = figure(7);
+title(sprintf("DSP QPSK"));
+pwelch(symbole_bandebase, [],[], [], Fe, 'centered');
+saveas(fig7, "figures/DSP_bande_base.png");
+
 %%Boucle EbN0
 Px = mean(abs(x).^2);
 EbN0m = 1:0.1:8; %en Db
@@ -91,14 +97,15 @@ for EbN0 = EbN0m
     %% Taux erreur binaire
     TEB = mean(bits_deco~=bits)
     
-    fig1 = figure(1);
+    fig6 = figure(6);
     hold on;
     scatter(EbN0, TEB, 'b+');
 
 end
 
+figure(6);
 plot(EbN0m, qfunc(sqrt(10.^(EbN0m/10))));
 set(gca,'yscale','log');
-%saveas(fig1, sprintf("figures/Chaine2TEB.png"));
+saveas(fig6, sprintf("figures/Chaine3TEB.png"));
 
 
